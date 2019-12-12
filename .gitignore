@@ -112,5 +112,5 @@ venv.bak/
 .PNG
 
 # weights
-.weight
-.weights
+*.weight
+*.weights
