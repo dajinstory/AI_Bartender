@@ -5,6 +5,7 @@ WARNING: spaghetti code.
 import numpy as np
 import pickle
 import os
+from sys import exit
 
 def parser(model):
 	"""
