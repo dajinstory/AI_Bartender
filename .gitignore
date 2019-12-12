@@ -102,3 +102,15 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# image
+.jpg
+.JPG
+.jpeg
+.JPEG
+.png
+.PNG
+
+# weights
+.weight
+.weights
