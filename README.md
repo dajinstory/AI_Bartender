@@ -8,8 +8,8 @@
 
 ### Triplet-net 
 1. concept
--<https://wwiiiii.tistory.com/entry/Pairwise-Triplet-Loss> 
--<https://towardsdatascience.com/image-similarity-using-triplet-loss-3744c0f67973>
+  1.<https://wwiiiii.tistory.com/entry/Pairwise-Triplet-Loss> 
+  2.-<https://towardsdatascience.com/image-similarity-using-triplet-loss-3744c0f67973>
 
 2. Tripletloss keras code - <https://github.com/KinWaiCheuk/Triplet-net-keras/blob/master/Triplet%20NN%20Test%20on%20MNIST.ipynb>
 
