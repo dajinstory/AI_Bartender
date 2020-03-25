@@ -118,4 +118,4 @@ venv.bak/
 
 
 # web
-node-modules/
+web/react-nodejs/ai_bartender/node-modules/
