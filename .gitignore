@@ -114,3 +114,8 @@ venv.bak/
 # weights
 *.weight
 *.weights
+
+
+
+# web
+node-modules/
