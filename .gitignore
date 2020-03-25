@@ -114,3 +114,9 @@ venv.bak/
 # weights
 *.weight
 *.weights
+
+
+
+# web
+#.web/react-nodejs/ai_bartender/node_modules
+web/react-nodejs/ai_bartender/node_modules

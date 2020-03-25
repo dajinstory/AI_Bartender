@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+<<<<<<< HEAD
+    <option name="languageLevel" value="ES6" />
+  </component>
+=======
+    <option name="languageLevel" value="JSX" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+>>>>>>> 821bb0a7d161dcd196155ea80ff8e4eff6c33d2e
+</project>
