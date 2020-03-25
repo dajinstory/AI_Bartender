@@ -9,12 +9,17 @@
 1. history - <https://nuggy875.tistory.com/20>
 2. R-CNN - <http://openresearch.ai/search?q=R-CNN>
 3. YOLO - <http://openresearch.ai/search?q=YOLO>
+4. SSD - <https://github.com/rykov8/ssd_keras>
 4. Labellmg - <https://github.com/tzutalin/labelImg>
 
 ### Triplet-net 
 1. concept1 - <https://wwiiiii.tistory.com/entry/Pairwise-Triplet-Loss> 
 2. concept2 - <https://towardsdatascience.com/image-similarity-using-triplet-loss-3744c0f67973>
 3. Tripletloss keras code - <https://github.com/KinWaiCheuk/Triplet-net-keras/blob/master/Triplet%20NN%20Test%20on%20MNIST.ipynb>
+
+### Web-Sever
+1. html - <https://www.inflearn.com/course/html-2>
+2. javascript - <https://www.inflearn.com/course/javascript>
 
 ### Docker
 1. For Windows - <https://steemit.com/kr/@mystarlight/docker>
