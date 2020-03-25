@@ -6,6 +6,12 @@ const cors = require('cors')
 
 app.use(cors())
 
+app.listen(8000, function(){
+  console.log("app listening to port 8000")
+});
+
+
+// set storage
 var storage = multer.diskStorage({
   destination: function(req,file,cb){
     cb(null, 'images');
@@ -14,15 +20,9 @@ var storage = multer.diskStorage({
     cb(null, moment().format('YYYYMMDDHHmmss') + "_" + file.originalname);
   }
 });
+var upload = multer({storage: storage}).single("selected_image");
 
-var upload = multer({storage: storage}).single("myImage");
-
-app.listen(8000, function(){
-  console.log("app listening to port 8000")
-});
-
-
-// image 검색
+// image search
 app.post("/upload", (req, res, next) => {
   upload(req, res, function(err){
     if( err instanceof multer.MulterError){

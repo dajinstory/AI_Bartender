@@ -13,7 +13,10 @@ class ImageSearch extends Component {
   }
 
   onFormSubmit(e) {
+      // preventdefault action
       e.preventDefault();
+
+      // set params
       const formData = new FormData();
       formData.append('myImage', this.state.file);
       const config = {
@@ -21,9 +24,10 @@ class ImageSearch extends Component {
               'content-type': 'multipart/form-data'
           }
       };
+
+      // call post
       axios.post("http://localhost:8000/upload", formData, config)
           .then((response) => {
-              alert(response.data);
               alert("successfully uploaded");
           }).catch((error) => {
               alert("fail to upload image");
@@ -41,7 +45,7 @@ class ImageSearch extends Component {
         <div className="image_search__container">
           <form onSubmit={this.onFormSubmit}>
             <h2> File Upload </h2>
-            <input type="file" name="myImage" onChange={this.onChange}/>
+            <input type="file" name="selected_image" onChange={this.onChange}/>
             <button type="submit">Upload</button>
           </form>
         </div>
