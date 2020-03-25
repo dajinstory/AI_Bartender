@@ -18,7 +18,7 @@ class ImageSearch extends Component {
 
       // set params
       const formData = new FormData();
-      formData.append('myImage', this.state.file);
+      formData.append('selected_image', this.state.file);
       const config = {
           headers: {
               'content-type': 'multipart/form-data'
