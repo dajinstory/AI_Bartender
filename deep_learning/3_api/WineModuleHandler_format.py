@@ -2,7 +2,7 @@ class WineModuleHandler:
 
     def __init__(self):
         self.log = {}
-        self.detector = load_models()
+        self.detector = load_detector()
         self.classifier = load_classifier()
         self.clusterer = load_clusterer()
         self.dataframe, self.center_vectors = self.load_dataframe()
