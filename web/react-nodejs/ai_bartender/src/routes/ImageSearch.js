@@ -33,6 +33,14 @@ class ImageSearch extends Component {
               alert("fail to upload image");
           }
       );
+
+      const result = axios.get("http://localhost:8000/image_search", formData, config)
+          .then((response)=>{
+              alert(response.result)
+          }).catch((error)=>{
+              alert('failfail')
+      })
+      console.log(result)
   }
 
   onChange(e){
@@ -43,11 +51,12 @@ class ImageSearch extends Component {
     return (
         ///
         <div className="image_search__container">
-          <form onSubmit={this.onFormSubmit}>
-            <h2> File Upload </h2>
-            <input type="file" name="selected_image" onChange={this.onChange}/>
-            <button type="submit">Upload</button>
-          </form>
+            <form onSubmit={this.onFormSubmit}>
+                <h2> File Upload </h2>
+                <input type="file" name="selected_image" onChange={this.onChange}/>
+                <button type="submit">Upload</button>
+            </form>
+            <h2 id="result"></h2>
         </div>
     )
   }

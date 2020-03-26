@@ -92,7 +92,7 @@ exception InvalidOperation {
 }
 
 
-service WineModule extends shared.SharedService {
+service Bartender extends shared.SharedService {
 
    list<WineInfo> search_wines(1:string filename),
    string test_function(1:string input),

@@ -16,10 +16,10 @@ var shared_ttypes = require('./shared_types');
 var SharedService = require('./SharedService');
 var SharedServiceClient = SharedService.Client;
 var SharedServiceProcessor = SharedService.Processor;
-var ttypes = require('./wine_module_types');
+var ttypes = require('./bartender_api_types');
 //HELPER FUNCTIONS AND STRUCTURES
 
-var WineModule_search_wines_args = function(args) {
+var Bartender_search_wines_args = function(args) {
   this.filename = null;
   if (args) {
     if (args.filename !== undefined && args.filename !== null) {
@@ -27,8 +27,8 @@ var WineModule_search_wines_args = function(args) {
     }
   }
 };
-WineModule_search_wines_args.prototype = {};
-WineModule_search_wines_args.prototype.read = function(input) {
+Bartender_search_wines_args.prototype = {};
+Bartender_search_wines_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -57,8 +57,8 @@ WineModule_search_wines_args.prototype.read = function(input) {
   return;
 };
 
-WineModule_search_wines_args.prototype.write = function(output) {
-  output.writeStructBegin('WineModule_search_wines_args');
+Bartender_search_wines_args.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_search_wines_args');
   if (this.filename !== null && this.filename !== undefined) {
     output.writeFieldBegin('filename', Thrift.Type.STRING, 1);
     output.writeString(this.filename);
@@ -69,7 +69,7 @@ WineModule_search_wines_args.prototype.write = function(output) {
   return;
 };
 
-var WineModule_search_wines_result = function(args) {
+var Bartender_search_wines_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined && args.success !== null) {
@@ -77,8 +77,8 @@ var WineModule_search_wines_result = function(args) {
     }
   }
 };
-WineModule_search_wines_result.prototype = {};
-WineModule_search_wines_result.prototype.read = function(input) {
+Bartender_search_wines_result.prototype = {};
+Bartender_search_wines_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -116,8 +116,8 @@ WineModule_search_wines_result.prototype.read = function(input) {
   return;
 };
 
-WineModule_search_wines_result.prototype.write = function(output) {
-  output.writeStructBegin('WineModule_search_wines_result');
+Bartender_search_wines_result.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_search_wines_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.LIST, 0);
     output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
@@ -135,7 +135,7 @@ WineModule_search_wines_result.prototype.write = function(output) {
   return;
 };
 
-var WineModule_test_function_args = function(args) {
+var Bartender_test_function_args = function(args) {
   this.input = null;
   if (args) {
     if (args.input !== undefined && args.input !== null) {
@@ -143,8 +143,8 @@ var WineModule_test_function_args = function(args) {
     }
   }
 };
-WineModule_test_function_args.prototype = {};
-WineModule_test_function_args.prototype.read = function(input) {
+Bartender_test_function_args.prototype = {};
+Bartender_test_function_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -173,8 +173,8 @@ WineModule_test_function_args.prototype.read = function(input) {
   return;
 };
 
-WineModule_test_function_args.prototype.write = function(output) {
-  output.writeStructBegin('WineModule_test_function_args');
+Bartender_test_function_args.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_test_function_args');
   if (this.input !== null && this.input !== undefined) {
     output.writeFieldBegin('input', Thrift.Type.STRING, 1);
     output.writeString(this.input);
@@ -185,7 +185,7 @@ WineModule_test_function_args.prototype.write = function(output) {
   return;
 };
 
-var WineModule_test_function_result = function(args) {
+var Bartender_test_function_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined && args.success !== null) {
@@ -193,8 +193,8 @@ var WineModule_test_function_result = function(args) {
     }
   }
 };
-WineModule_test_function_result.prototype = {};
-WineModule_test_function_result.prototype.read = function(input) {
+Bartender_test_function_result.prototype = {};
+Bartender_test_function_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -223,8 +223,8 @@ WineModule_test_function_result.prototype.read = function(input) {
   return;
 };
 
-WineModule_test_function_result.prototype.write = function(output) {
-  output.writeStructBegin('WineModule_test_function_result');
+Bartender_test_function_result.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_test_function_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.STRING, 0);
     output.writeString(this.success);
@@ -235,10 +235,10 @@ WineModule_test_function_result.prototype.write = function(output) {
   return;
 };
 
-var WineModule_ping_args = function(args) {
+var Bartender_ping_args = function(args) {
 };
-WineModule_ping_args.prototype = {};
-WineModule_ping_args.prototype.read = function(input) {
+Bartender_ping_args.prototype = {};
+Bartender_ping_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -253,17 +253,17 @@ WineModule_ping_args.prototype.read = function(input) {
   return;
 };
 
-WineModule_ping_args.prototype.write = function(output) {
-  output.writeStructBegin('WineModule_ping_args');
+Bartender_ping_args.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_ping_args');
   output.writeFieldStop();
   output.writeStructEnd();
   return;
 };
 
-var WineModule_ping_result = function(args) {
+var Bartender_ping_result = function(args) {
 };
-WineModule_ping_result.prototype = {};
-WineModule_ping_result.prototype.read = function(input) {
+Bartender_ping_result.prototype = {};
+Bartender_ping_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -278,17 +278,17 @@ WineModule_ping_result.prototype.read = function(input) {
   return;
 };
 
-WineModule_ping_result.prototype.write = function(output) {
-  output.writeStructBegin('WineModule_ping_result');
+Bartender_ping_result.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_ping_result');
   output.writeFieldStop();
   output.writeStructEnd();
   return;
 };
 
-var WineModule_zip_args = function(args) {
+var Bartender_zip_args = function(args) {
 };
-WineModule_zip_args.prototype = {};
-WineModule_zip_args.prototype.read = function(input) {
+Bartender_zip_args.prototype = {};
+Bartender_zip_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -303,17 +303,17 @@ WineModule_zip_args.prototype.read = function(input) {
   return;
 };
 
-WineModule_zip_args.prototype.write = function(output) {
-  output.writeStructBegin('WineModule_zip_args');
+Bartender_zip_args.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_zip_args');
   output.writeFieldStop();
   output.writeStructEnd();
   return;
 };
 
-var WineModule_zip_result = function(args) {
+var Bartender_zip_result = function(args) {
 };
-WineModule_zip_result.prototype = {};
-WineModule_zip_result.prototype.read = function(input) {
+Bartender_zip_result.prototype = {};
+Bartender_zip_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -328,24 +328,24 @@ WineModule_zip_result.prototype.read = function(input) {
   return;
 };
 
-WineModule_zip_result.prototype.write = function(output) {
-  output.writeStructBegin('WineModule_zip_result');
+Bartender_zip_result.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_zip_result');
   output.writeFieldStop();
   output.writeStructEnd();
   return;
 };
 
-var WineModuleClient = exports.Client = function(output, pClass) {
+var BartenderClient = exports.Client = function(output, pClass) {
   this.output = output;
   this.pClass = pClass;
   this._seqid = 0;
   this._reqs = {};
 };
-Thrift.inherits(WineModuleClient, SharedServiceClient);
-WineModuleClient.prototype.seqid = function() { return this._seqid; };
-WineModuleClient.prototype.new_seqid = function() { return this._seqid += 1; };
+Thrift.inherits(BartenderClient, SharedServiceClient);
+BartenderClient.prototype.seqid = function() { return this._seqid; };
+BartenderClient.prototype.new_seqid = function() { return this._seqid += 1; };
 
-WineModuleClient.prototype.search_wines = function(filename, callback) {
+BartenderClient.prototype.search_wines = function(filename, callback) {
   this._seqid = this.new_seqid();
   if (callback === undefined) {
     var _defer = Q.defer();
@@ -364,12 +364,12 @@ WineModuleClient.prototype.search_wines = function(filename, callback) {
   }
 };
 
-WineModuleClient.prototype.send_search_wines = function(filename) {
+BartenderClient.prototype.send_search_wines = function(filename) {
   var output = new this.pClass(this.output);
   var params = {
     filename: filename
   };
-  var args = new WineModule_search_wines_args(params);
+  var args = new Bartender_search_wines_args(params);
   try {
     output.writeMessageBegin('search_wines', Thrift.MessageType.CALL, this.seqid());
     args.write(output);
@@ -385,7 +385,7 @@ WineModuleClient.prototype.send_search_wines = function(filename) {
   }
 };
 
-WineModuleClient.prototype.recv_search_wines = function(input,mtype,rseqid) {
+BartenderClient.prototype.recv_search_wines = function(input,mtype,rseqid) {
   var callback = this._reqs[rseqid] || function() {};
   delete this._reqs[rseqid];
   if (mtype == Thrift.MessageType.EXCEPTION) {
@@ -394,7 +394,7 @@ WineModuleClient.prototype.recv_search_wines = function(input,mtype,rseqid) {
     input.readMessageEnd();
     return callback(x);
   }
-  var result = new WineModule_search_wines_result();
+  var result = new Bartender_search_wines_result();
   result.read(input);
   input.readMessageEnd();
 
@@ -404,7 +404,7 @@ WineModuleClient.prototype.recv_search_wines = function(input,mtype,rseqid) {
   return callback('search_wines failed: unknown result');
 };
 
-WineModuleClient.prototype.test_function = function(input, callback) {
+BartenderClient.prototype.test_function = function(input, callback) {
   this._seqid = this.new_seqid();
   if (callback === undefined) {
     var _defer = Q.defer();
@@ -423,12 +423,12 @@ WineModuleClient.prototype.test_function = function(input, callback) {
   }
 };
 
-WineModuleClient.prototype.send_test_function = function(input) {
+BartenderClient.prototype.send_test_function = function(input) {
   var output = new this.pClass(this.output);
   var params = {
     input: input
   };
-  var args = new WineModule_test_function_args(params);
+  var args = new Bartender_test_function_args(params);
   try {
     output.writeMessageBegin('test_function', Thrift.MessageType.CALL, this.seqid());
     args.write(output);
@@ -444,7 +444,7 @@ WineModuleClient.prototype.send_test_function = function(input) {
   }
 };
 
-WineModuleClient.prototype.recv_test_function = function(input,mtype,rseqid) {
+BartenderClient.prototype.recv_test_function = function(input,mtype,rseqid) {
   var callback = this._reqs[rseqid] || function() {};
   delete this._reqs[rseqid];
   if (mtype == Thrift.MessageType.EXCEPTION) {
@@ -453,7 +453,7 @@ WineModuleClient.prototype.recv_test_function = function(input,mtype,rseqid) {
     input.readMessageEnd();
     return callback(x);
   }
-  var result = new WineModule_test_function_result();
+  var result = new Bartender_test_function_result();
   result.read(input);
   input.readMessageEnd();
 
@@ -463,7 +463,7 @@ WineModuleClient.prototype.recv_test_function = function(input,mtype,rseqid) {
   return callback('test_function failed: unknown result');
 };
 
-WineModuleClient.prototype.ping = function(callback) {
+BartenderClient.prototype.ping = function(callback) {
   this._seqid = this.new_seqid();
   if (callback === undefined) {
     var _defer = Q.defer();
@@ -482,9 +482,9 @@ WineModuleClient.prototype.ping = function(callback) {
   }
 };
 
-WineModuleClient.prototype.send_ping = function() {
+BartenderClient.prototype.send_ping = function() {
   var output = new this.pClass(this.output);
-  var args = new WineModule_ping_args();
+  var args = new Bartender_ping_args();
   try {
     output.writeMessageBegin('ping', Thrift.MessageType.CALL, this.seqid());
     args.write(output);
@@ -500,7 +500,7 @@ WineModuleClient.prototype.send_ping = function() {
   }
 };
 
-WineModuleClient.prototype.recv_ping = function(input,mtype,rseqid) {
+BartenderClient.prototype.recv_ping = function(input,mtype,rseqid) {
   var callback = this._reqs[rseqid] || function() {};
   delete this._reqs[rseqid];
   if (mtype == Thrift.MessageType.EXCEPTION) {
@@ -509,14 +509,14 @@ WineModuleClient.prototype.recv_ping = function(input,mtype,rseqid) {
     input.readMessageEnd();
     return callback(x);
   }
-  var result = new WineModule_ping_result();
+  var result = new Bartender_ping_result();
   result.read(input);
   input.readMessageEnd();
 
   callback(null);
 };
 
-WineModuleClient.prototype.zip = function(callback) {
+BartenderClient.prototype.zip = function(callback) {
   this._seqid = this.new_seqid();
   if (callback === undefined) {
     var _defer = Q.defer();
@@ -535,9 +535,9 @@ WineModuleClient.prototype.zip = function(callback) {
   }
 };
 
-WineModuleClient.prototype.send_zip = function() {
+BartenderClient.prototype.send_zip = function() {
   var output = new this.pClass(this.output);
-  var args = new WineModule_zip_args();
+  var args = new Bartender_zip_args();
   try {
     output.writeMessageBegin('zip', Thrift.MessageType.ONEWAY, this.seqid());
     args.write(output);
@@ -555,11 +555,11 @@ WineModuleClient.prototype.send_zip = function() {
     throw e;
   }
 };
-var WineModuleProcessor = exports.Processor = function(handler) {
+var BartenderProcessor = exports.Processor = function(handler) {
   this._handler = handler;
 };
-Thrift.inherits(WineModuleProcessor, SharedServiceProcessor);
-WineModuleProcessor.prototype.process = function(input, output) {
+Thrift.inherits(BartenderProcessor, SharedServiceProcessor);
+BartenderProcessor.prototype.process = function(input, output) {
   var r = input.readMessageBegin();
   if (this['process_' + r.fname]) {
     return this['process_' + r.fname].call(this, r.rseqid, input, output);
@@ -573,15 +573,15 @@ WineModuleProcessor.prototype.process = function(input, output) {
     output.flush();
   }
 };
-WineModuleProcessor.prototype.process_search_wines = function(seqid, input, output) {
-  var args = new WineModule_search_wines_args();
+BartenderProcessor.prototype.process_search_wines = function(seqid, input, output) {
+  var args = new Bartender_search_wines_args();
   args.read(input);
   input.readMessageEnd();
   if (this._handler.search_wines.length === 1) {
     Q.fcall(this._handler.search_wines.bind(this._handler),
       args.filename
     ).then(function(result) {
-      var result_obj = new WineModule_search_wines_result({success: result});
+      var result_obj = new Bartender_search_wines_result({success: result});
       output.writeMessageBegin("search_wines", Thrift.MessageType.REPLY, seqid);
       result_obj.write(output);
       output.writeMessageEnd();
@@ -598,7 +598,7 @@ WineModuleProcessor.prototype.process_search_wines = function(seqid, input, outp
     this._handler.search_wines(args.filename, function (err, result) {
       var result_obj;
       if ((err === null || typeof err === 'undefined')) {
-        result_obj = new WineModule_search_wines_result((err !== null || typeof err === 'undefined') ? err : {success: result});
+        result_obj = new Bartender_search_wines_result((err !== null || typeof err === 'undefined') ? err : {success: result});
         output.writeMessageBegin("search_wines", Thrift.MessageType.REPLY, seqid);
       } else {
         result_obj = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
@@ -610,15 +610,15 @@ WineModuleProcessor.prototype.process_search_wines = function(seqid, input, outp
     });
   }
 };
-WineModuleProcessor.prototype.process_test_function = function(seqid, input, output) {
-  var args = new WineModule_test_function_args();
+BartenderProcessor.prototype.process_test_function = function(seqid, input, output) {
+  var args = new Bartender_test_function_args();
   args.read(input);
   input.readMessageEnd();
   if (this._handler.test_function.length === 1) {
     Q.fcall(this._handler.test_function.bind(this._handler),
       args.input
     ).then(function(result) {
-      var result_obj = new WineModule_test_function_result({success: result});
+      var result_obj = new Bartender_test_function_result({success: result});
       output.writeMessageBegin("test_function", Thrift.MessageType.REPLY, seqid);
       result_obj.write(output);
       output.writeMessageEnd();
@@ -635,7 +635,7 @@ WineModuleProcessor.prototype.process_test_function = function(seqid, input, out
     this._handler.test_function(args.input, function (err, result) {
       var result_obj;
       if ((err === null || typeof err === 'undefined')) {
-        result_obj = new WineModule_test_function_result((err !== null || typeof err === 'undefined') ? err : {success: result});
+        result_obj = new Bartender_test_function_result((err !== null || typeof err === 'undefined') ? err : {success: result});
         output.writeMessageBegin("test_function", Thrift.MessageType.REPLY, seqid);
       } else {
         result_obj = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
@@ -647,14 +647,14 @@ WineModuleProcessor.prototype.process_test_function = function(seqid, input, out
     });
   }
 };
-WineModuleProcessor.prototype.process_ping = function(seqid, input, output) {
-  var args = new WineModule_ping_args();
+BartenderProcessor.prototype.process_ping = function(seqid, input, output) {
+  var args = new Bartender_ping_args();
   args.read(input);
   input.readMessageEnd();
   if (this._handler.ping.length === 0) {
     Q.fcall(this._handler.ping.bind(this._handler)
     ).then(function(result) {
-      var result_obj = new WineModule_ping_result({success: result});
+      var result_obj = new Bartender_ping_result({success: result});
       output.writeMessageBegin("ping", Thrift.MessageType.REPLY, seqid);
       result_obj.write(output);
       output.writeMessageEnd();
@@ -671,7 +671,7 @@ WineModuleProcessor.prototype.process_ping = function(seqid, input, output) {
     this._handler.ping(function (err, result) {
       var result_obj;
       if ((err === null || typeof err === 'undefined')) {
-        result_obj = new WineModule_ping_result((err !== null || typeof err === 'undefined') ? err : {success: result});
+        result_obj = new Bartender_ping_result((err !== null || typeof err === 'undefined') ? err : {success: result});
         output.writeMessageBegin("ping", Thrift.MessageType.REPLY, seqid);
       } else {
         result_obj = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
@@ -683,8 +683,8 @@ WineModuleProcessor.prototype.process_ping = function(seqid, input, output) {
     });
   }
 };
-WineModuleProcessor.prototype.process_zip = function(seqid, input, output) {
-  var args = new WineModule_zip_args();
+BartenderProcessor.prototype.process_zip = function(seqid, input, output) {
+  var args = new Bartender_zip_args();
   args.read(input);
   input.readMessageEnd();
   this._handler.zip();
