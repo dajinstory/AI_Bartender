@@ -11,16 +11,17 @@ app.listen(8000, function(){
 });
 
 
-// set storage
-var storage = multer.diskStorage({
+// set image storage and upload method
+var image_storage = multer.diskStorage({
   destination: function(req,file,cb){
     cb(null, 'images');
   },
   filename: function(req,file,cb){
-    cb(null, moment().format('YYYYMMDDHHmmss') + "_" + file.originalname);
+    //cb(null, moment().format('YYYYMMDDHHmmss') + "_" + file.originalname);
+    cb(null, file.originalname);
   }
 });
-var upload = multer({storage: storage}).single("selected_image");
+var upload = multer({storage: image_storage}).single("selected_image");
 
 // image search
 app.post("/upload", (req, res, next) => {
@@ -35,4 +36,10 @@ app.post("/upload", (req, res, next) => {
     console.log(req.file.size)
     return res.json({success:1})
   });
+});
+
+// image result
+app.get("/image_search", (req, res, next) => {
+  console.log("get call")
+  res.result="end"
 });
