@@ -3,10 +3,11 @@ import sys
 import time
 
 sys.path.append('../thrift_modules/gen-py')
+#sys.path.append('C:\\Users\\DajinHan\\Desktop\\Projects\\AI_Bartender\\web\\react-nodejs\\server_bartender\\thrift_modules\\gen-py')
 sys.path.insert(0, glob.glob('C:\\Users\\DajinHan\\Anaconda3\\envs\\ai_bartender\\Lib\\*')[0])
 
 from bartender_api import Bartender
-from bartender_api.ttypes import InvalidOperation, Operation
+from bartender_api.ttypes import InvalidOperation
 
 from shared.ttypes import SharedStruct
 

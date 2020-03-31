@@ -192,7 +192,3 @@ InvalidOperation.prototype.write = function(output) {
 };
 
 ttypes.INT32CONSTANT = 9853;
-ttypes.MAPCONSTANT = {
-  'goodnight' : 'moon',
-  'hello' : 'world'
-};
