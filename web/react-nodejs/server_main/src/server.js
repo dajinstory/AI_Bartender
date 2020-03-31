@@ -1,3 +1,7 @@
+var thrift = require('thrift');
+var Bartender = require('../thrift_modules/gen-nodejs/Bartender');
+var ttypes = require('../thrift_modules/gen-nodejs/bartender_api_types');
+
 const express = require('express');
 const app = express();
 const multer = require('multer');

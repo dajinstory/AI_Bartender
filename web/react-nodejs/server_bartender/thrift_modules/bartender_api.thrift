@@ -63,20 +63,6 @@ namespace netstd wine_module
 const i32 INT32CONSTANT = 9853
 const map<string,string> MAPCONSTANT = {'hello':'world', 'goodnight':'moon'}
 
-enum Operation {
-  ADD = 1,
-  SUBTRACT = 2,
-  MULTIPLY = 3,
-  DIVIDE = 4
-}
-
-
-struct Work {
-  1: i32 num1 = 0,
-  2: i32 num2,
-  3: Operation op,
-  4: optional string comment,
-}
 
 struct WineInfo {
   1: i64 x,
@@ -97,7 +83,6 @@ service Bartender extends shared.SharedService {
    list<WineInfo> search_wines(1:string filename),
    string test_function(1:string input),
    void ping(),
-
    /**
     * This method has a oneway modifier. That means the client only makes
     * a request and does not listen for any response at all. Oneway methods

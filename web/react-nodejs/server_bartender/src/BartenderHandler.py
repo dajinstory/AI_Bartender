@@ -2,7 +2,7 @@ import glob
 import sys
 import time
 
-sys.path.append('modules/gen-py')
+sys.path.append('../thrift_modules/gen-py')
 sys.path.insert(0, glob.glob('C:\\Users\\DajinHan\\Anaconda3\\envs\\ai_bartender\\Lib\\*')[0])
 
 from bartender_api import Bartender
@@ -106,8 +106,16 @@ class BartenderHandler:
         print(">>>get_label : total_time : ", end_time-start_time)
         return label
 
+
+    # test functions
     def ping(self):
         print('>>>ping_server')
+
+
+    def test_function(self, input):
+        print('>>> string input : '+input)
+        return input
+
 
 
 if __name__ == '__main__':
