@@ -1,4 +1,4 @@
-var thrift2 = require('thrift')
+var thrift = require('thrift')
 var Bartender = require('../server/modules/gen-nodejs/Bartender');
 var ttypes = require('../server/modules/gen-nodejs/bartender_api_types');
 const assert = require('assert');
