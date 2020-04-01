@@ -28,7 +28,15 @@ class Iface(shared.SharedService.Iface):
         """
         pass
 
-    def test_function(self, input):
+    def test_function_string(self, input):
+        """
+        Parameters:
+         - input
+
+        """
+        pass
+
+    def test_function_maplist(self, input):
         """
         Parameters:
          - input
@@ -85,24 +93,24 @@ class Client(shared.SharedService.Client, Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "search_wines failed: unknown result")
 
-    def test_function(self, input):
+    def test_function_string(self, input):
         """
         Parameters:
          - input
 
         """
-        self.send_test_function(input)
-        return self.recv_test_function()
+        self.send_test_function_string(input)
+        return self.recv_test_function_string()
 
-    def send_test_function(self, input):
-        self._oprot.writeMessageBegin('test_function', TMessageType.CALL, self._seqid)
-        args = test_function_args()
+    def send_test_function_string(self, input):
+        self._oprot.writeMessageBegin('test_function_string', TMessageType.CALL, self._seqid)
+        args = test_function_string_args()
         args.input = input
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
 
-    def recv_test_function(self):
+    def recv_test_function_string(self):
         iprot = self._iprot
         (fname, mtype, rseqid) = iprot.readMessageBegin()
         if mtype == TMessageType.EXCEPTION:
@@ -110,12 +118,44 @@ class Client(shared.SharedService.Client, Iface):
             x.read(iprot)
             iprot.readMessageEnd()
             raise x
-        result = test_function_result()
+        result = test_function_string_result()
         result.read(iprot)
         iprot.readMessageEnd()
         if result.success is not None:
             return result.success
-        raise TApplicationException(TApplicationException.MISSING_RESULT, "test_function failed: unknown result")
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "test_function_string failed: unknown result")
+
+    def test_function_maplist(self, input):
+        """
+        Parameters:
+         - input
+
+        """
+        self.send_test_function_maplist(input)
+        return self.recv_test_function_maplist()
+
+    def send_test_function_maplist(self, input):
+        self._oprot.writeMessageBegin('test_function_maplist', TMessageType.CALL, self._seqid)
+        args = test_function_maplist_args()
+        args.input = input
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_test_function_maplist(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = test_function_maplist_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "test_function_maplist failed: unknown result")
 
     def ping(self):
         self.send_ping()
@@ -162,7 +202,8 @@ class Processor(shared.SharedService.Processor, Iface, TProcessor):
     def __init__(self, handler):
         shared.SharedService.Processor.__init__(self, handler)
         self._processMap["search_wines"] = Processor.process_search_wines
-        self._processMap["test_function"] = Processor.process_test_function
+        self._processMap["test_function_string"] = Processor.process_test_function_string
+        self._processMap["test_function_maplist"] = Processor.process_test_function_maplist
         self._processMap["ping"] = Processor.process_ping
         self._processMap["zip"] = Processor.process_zip
         self._on_message_begin = None
@@ -210,13 +251,13 @@ class Processor(shared.SharedService.Processor, Iface, TProcessor):
         oprot.writeMessageEnd()
         oprot.trans.flush()
 
-    def process_test_function(self, seqid, iprot, oprot):
-        args = test_function_args()
+    def process_test_function_string(self, seqid, iprot, oprot):
+        args = test_function_string_args()
         args.read(iprot)
         iprot.readMessageEnd()
-        result = test_function_result()
+        result = test_function_string_result()
         try:
-            result.success = self._handler.test_function(args.input)
+            result.success = self._handler.test_function_string(args.input)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -228,7 +269,30 @@ class Processor(shared.SharedService.Processor, Iface, TProcessor):
             logging.exception('Unexpected exception in handler')
             msg_type = TMessageType.EXCEPTION
             result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
-        oprot.writeMessageBegin("test_function", msg_type, seqid)
+        oprot.writeMessageBegin("test_function_string", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
+    def process_test_function_maplist(self, seqid, iprot, oprot):
+        args = test_function_maplist_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = test_function_maplist_result()
+        try:
+            result.success = self._handler.test_function_maplist(args.input)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("test_function_maplist", msg_type, seqid)
         result.write(oprot)
         oprot.writeMessageEnd()
         oprot.trans.flush()
@@ -357,8 +421,13 @@ class search_wines_result(object):
                     self.success = []
                     (_etype3, _size0) = iprot.readListBegin()
                     for _i4 in range(_size0):
-                        _elem5 = WineInfo()
-                        _elem5.read(iprot)
+                        _elem5 = {}
+                        (_ktype7, _vtype8, _size6) = iprot.readMapBegin()
+                        for _i10 in range(_size6):
+                            _key11 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _val12 = iprot.readI32()
+                            _elem5[_key11] = _val12
+                        iprot.readMapEnd()
                         self.success.append(_elem5)
                     iprot.readListEnd()
                 else:
@@ -375,9 +444,13 @@ class search_wines_result(object):
         oprot.writeStructBegin('search_wines_result')
         if self.success is not None:
             oprot.writeFieldBegin('success', TType.LIST, 0)
-            oprot.writeListBegin(TType.STRUCT, len(self.success))
-            for iter6 in self.success:
-                iter6.write(oprot)
+            oprot.writeListBegin(TType.MAP, len(self.success))
+            for iter13 in self.success:
+                oprot.writeMapBegin(TType.STRING, TType.I32, len(iter13))
+                for kiter14, viter15 in iter13.items():
+                    oprot.writeString(kiter14.encode('utf-8') if sys.version_info[0] == 2 else kiter14)
+                    oprot.writeI32(viter15)
+                oprot.writeMapEnd()
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -398,11 +471,11 @@ class search_wines_result(object):
         return not (self == other)
 all_structs.append(search_wines_result)
 search_wines_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [WineInfo, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.MAP, (TType.STRING, 'UTF8', TType.I32, None, False), False), None, ),  # 0
 )
 
 
-class test_function_args(object):
+class test_function_string_args(object):
     """
     Attributes:
      - input
@@ -436,7 +509,7 @@ class test_function_args(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('test_function_args')
+        oprot.writeStructBegin('test_function_string_args')
         if self.input is not None:
             oprot.writeFieldBegin('input', TType.STRING, 1)
             oprot.writeString(self.input.encode('utf-8') if sys.version_info[0] == 2 else self.input)
@@ -457,14 +530,14 @@ class test_function_args(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(test_function_args)
-test_function_args.thrift_spec = (
+all_structs.append(test_function_string_args)
+test_function_string_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'input', 'UTF8', None, ),  # 1
 )
 
 
-class test_function_result(object):
+class test_function_string_result(object):
     """
     Attributes:
      - success
@@ -498,7 +571,7 @@ class test_function_result(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('test_function_result')
+        oprot.writeStructBegin('test_function_string_result')
         if self.success is not None:
             oprot.writeFieldBegin('success', TType.STRING, 0)
             oprot.writeString(self.success.encode('utf-8') if sys.version_info[0] == 2 else self.success)
@@ -519,9 +592,150 @@ class test_function_result(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(test_function_result)
-test_function_result.thrift_spec = (
+all_structs.append(test_function_string_result)
+test_function_string_result.thrift_spec = (
     (0, TType.STRING, 'success', 'UTF8', None, ),  # 0
+)
+
+
+class test_function_maplist_args(object):
+    """
+    Attributes:
+     - input
+
+    """
+
+
+    def __init__(self, input=None,):
+        self.input = input
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.input = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('test_function_maplist_args')
+        if self.input is not None:
+            oprot.writeFieldBegin('input', TType.STRING, 1)
+            oprot.writeString(self.input.encode('utf-8') if sys.version_info[0] == 2 else self.input)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(test_function_maplist_args)
+test_function_maplist_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'input', 'UTF8', None, ),  # 1
+)
+
+
+class test_function_maplist_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.LIST:
+                    self.success = []
+                    (_etype19, _size16) = iprot.readListBegin()
+                    for _i20 in range(_size16):
+                        _elem21 = {}
+                        (_ktype23, _vtype24, _size22) = iprot.readMapBegin()
+                        for _i26 in range(_size22):
+                            _key27 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _val28 = iprot.readI32()
+                            _elem21[_key27] = _val28
+                        iprot.readMapEnd()
+                        self.success.append(_elem21)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('test_function_maplist_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.LIST, 0)
+            oprot.writeListBegin(TType.MAP, len(self.success))
+            for iter29 in self.success:
+                oprot.writeMapBegin(TType.STRING, TType.I32, len(iter29))
+                for kiter30, viter31 in iter29.items():
+                    oprot.writeString(kiter30.encode('utf-8') if sys.version_info[0] == 2 else kiter30)
+                    oprot.writeI32(viter31)
+                oprot.writeMapEnd()
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(test_function_maplist_result)
+test_function_maplist_result.thrift_spec = (
+    (0, TType.LIST, 'success', (TType.MAP, (TType.STRING, 'UTF8', TType.I32, None, False), False), None, ),  # 0
 )
 
 

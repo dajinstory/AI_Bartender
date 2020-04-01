@@ -25,7 +25,8 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('')
     print('Functions:')
     print('   search_wines(string filename)')
-    print('  string test_function(string input)')
+    print('  string test_function_string(string input)')
+    print('   test_function_maplist(string input)')
     print('  void ping()')
     print('  void zip()')
     print('  SharedStruct getStruct(i32 key)')
@@ -114,11 +115,17 @@ if cmd == 'search_wines':
         sys.exit(1)
     pp.pprint(client.search_wines(args[0],))
 
-elif cmd == 'test_function':
+elif cmd == 'test_function_string':
     if len(args) != 1:
-        print('test_function requires 1 args')
+        print('test_function_string requires 1 args')
         sys.exit(1)
-    pp.pprint(client.test_function(args[0],))
+    pp.pprint(client.test_function_string(args[0],))
+
+elif cmd == 'test_function_maplist':
+    if len(args) != 1:
+        print('test_function_maplist requires 1 args')
+        sys.exit(1)
+    pp.pprint(client.test_function_maplist(args[0],))
 
 elif cmd == 'ping':
     if len(args) != 0:

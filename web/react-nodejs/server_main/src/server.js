@@ -70,12 +70,19 @@ app.post("/upload", (req, res, next) => {
       } else{
         console.log('ping()');
       }
-      client.test_function("test", async function(err, response) {
+      client.test_function_string("test_function_string", async function(err, response) {
         if (err){
           console.log("error : " + err)
         } else{
           console.log("string: " + response);
         }
+        client.test_function_maplist("test_function_maplist", function(err, response) {
+          if (err) {
+            console.log("error : " + err)
+          } else {
+            console.log('maplist - first wineobj: ' + response[0]['x'] + response[0]['y'] + response[0]['len_x'] + response[0]['len_y'] + response[0]['label']);
+          }
+        });
       });
     });
 

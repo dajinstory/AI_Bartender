@@ -66,11 +66,29 @@ class BartenderHandler:
         return clusterer
 
 
-    def search_wines(self, filename):
-        src = cv2.imread("../image/"+filename, cv2.IMREAD_COLOR)
-        objects = get_objects(src)
-        #[{'x':x, 'y':y, 'len_x':len_x, 'len_y':len_y, 'label':label}]
+    # def search_wines(self, filename):
+    #     src = cv2.imread("../image/"+filename, cv2.IMREAD_COLOR)
+    #     objects = get_objects(src)
+    #     #[{'x':x, 'y':y, 'len_x':len_x, 'len_y':len_y, 'label':label}]
 
+    #     results=[]
+    #     for object in objects:
+    #         if object['label']==0:
+    #             continue
+
+    #         # get roi portion of image and resize it
+    #         roi = src[object['x']:object['x']+object['len_x'], object['y']:object['y']+object['len_y']]
+    #         dst = cv2.resize(roi, dsize=(500, 500), interpolation=cv2.INTER_AREA)
+
+    #         # get vector and label
+    #         vector = get_vector(dst)
+    #         label = get_label(vector)
+    #         object['label']=label
+    #         results.append(object)
+
+    #     return results
+
+    def search_wines(self, filename):
         results=[]
         for object in objects:
             if object['label']==0:
@@ -113,9 +131,24 @@ class BartenderHandler:
         print('>>>ping_server')
 
 
-    def test_function(self, input):
+    def test_function_string(self, input):
         print('>>> string input : '+input)
         return input
+
+    def test_function_object(self, input):
+        print('>>> object input : '+input)
+        return input
+
+    def test_function_maplist(self, input):
+        print('>>> maplist input : '+input)
+        wine = {'x':1, 'y':1, 'len_x':10, 'len_y':10, 'label':10}
+        wines = []
+        wines.append(wine)
+        wines.append(wine)
+        for w in wines:
+            print(w)
+
+        return wines
 
 
 

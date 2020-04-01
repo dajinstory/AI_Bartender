@@ -73,7 +73,7 @@ var Bartender_search_wines_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined && args.success !== null) {
-      this.success = Thrift.copyList(args.success, [ttypes.WineInfo]);
+      this.success = Thrift.copyList(args.success, [Thrift.copyMap, null]);
     }
   }
 };
@@ -95,8 +95,17 @@ Bartender_search_wines_result.prototype.read = function(input) {
         var _size0 = _rtmp31.size || 0;
         for (var _i2 = 0; _i2 < _size0; ++_i2) {
           var elem3 = null;
-          elem3 = new ttypes.WineInfo();
-          elem3.read(input);
+          elem3 = {};
+          var _rtmp35 = input.readMapBegin();
+          var _size4 = _rtmp35.size || 0;
+          for (var _i6 = 0; _i6 < _size4; ++_i6) {
+            var key7 = null;
+            var val8 = null;
+            key7 = input.readString();
+            val8 = input.readI32();
+            elem3[key7] = val8;
+          }
+          input.readMapEnd();
           this.success.push(elem3);
         }
         input.readListEnd();
@@ -120,11 +129,19 @@ Bartender_search_wines_result.prototype.write = function(output) {
   output.writeStructBegin('Bartender_search_wines_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.LIST, 0);
-    output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-    for (var iter4 in this.success) {
-      if (this.success.hasOwnProperty(iter4)) {
-        iter4 = this.success[iter4];
-        iter4.write(output);
+    output.writeListBegin(Thrift.Type.MAP, this.success.length);
+    for (var iter9 in this.success) {
+      if (this.success.hasOwnProperty(iter9)) {
+        iter9 = this.success[iter9];
+        output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.I32, Thrift.objectLength(iter9));
+        for (var kiter10 in iter9) {
+          if (iter9.hasOwnProperty(kiter10)) {
+            var viter11 = iter9[kiter10];
+            output.writeString(kiter10);
+            output.writeI32(viter11);
+          }
+        }
+        output.writeMapEnd();
       }
     }
     output.writeListEnd();
@@ -135,7 +152,7 @@ Bartender_search_wines_result.prototype.write = function(output) {
   return;
 };
 
-var Bartender_test_function_args = function(args) {
+var Bartender_test_function_string_args = function(args) {
   this.input = null;
   if (args) {
     if (args.input !== undefined && args.input !== null) {
@@ -143,8 +160,8 @@ var Bartender_test_function_args = function(args) {
     }
   }
 };
-Bartender_test_function_args.prototype = {};
-Bartender_test_function_args.prototype.read = function(input) {
+Bartender_test_function_string_args.prototype = {};
+Bartender_test_function_string_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -173,8 +190,8 @@ Bartender_test_function_args.prototype.read = function(input) {
   return;
 };
 
-Bartender_test_function_args.prototype.write = function(output) {
-  output.writeStructBegin('Bartender_test_function_args');
+Bartender_test_function_string_args.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_test_function_string_args');
   if (this.input !== null && this.input !== undefined) {
     output.writeFieldBegin('input', Thrift.Type.STRING, 1);
     output.writeString(this.input);
@@ -185,7 +202,7 @@ Bartender_test_function_args.prototype.write = function(output) {
   return;
 };
 
-var Bartender_test_function_result = function(args) {
+var Bartender_test_function_string_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined && args.success !== null) {
@@ -193,8 +210,8 @@ var Bartender_test_function_result = function(args) {
     }
   }
 };
-Bartender_test_function_result.prototype = {};
-Bartender_test_function_result.prototype.read = function(input) {
+Bartender_test_function_string_result.prototype = {};
+Bartender_test_function_string_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true) {
     var ret = input.readFieldBegin();
@@ -223,11 +240,144 @@ Bartender_test_function_result.prototype.read = function(input) {
   return;
 };
 
-Bartender_test_function_result.prototype.write = function(output) {
-  output.writeStructBegin('Bartender_test_function_result');
+Bartender_test_function_string_result.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_test_function_string_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.STRING, 0);
     output.writeString(this.success);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+var Bartender_test_function_maplist_args = function(args) {
+  this.input = null;
+  if (args) {
+    if (args.input !== undefined && args.input !== null) {
+      this.input = args.input;
+    }
+  }
+};
+Bartender_test_function_maplist_args.prototype = {};
+Bartender_test_function_maplist_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true) {
+    var ret = input.readFieldBegin();
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid) {
+      case 1:
+      if (ftype == Thrift.Type.STRING) {
+        this.input = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+Bartender_test_function_maplist_args.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_test_function_maplist_args');
+  if (this.input !== null && this.input !== undefined) {
+    output.writeFieldBegin('input', Thrift.Type.STRING, 1);
+    output.writeString(this.input);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+var Bartender_test_function_maplist_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined && args.success !== null) {
+      this.success = Thrift.copyList(args.success, [Thrift.copyMap, null]);
+    }
+  }
+};
+Bartender_test_function_maplist_result.prototype = {};
+Bartender_test_function_maplist_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true) {
+    var ret = input.readFieldBegin();
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid) {
+      case 0:
+      if (ftype == Thrift.Type.LIST) {
+        this.success = [];
+        var _rtmp313 = input.readListBegin();
+        var _size12 = _rtmp313.size || 0;
+        for (var _i14 = 0; _i14 < _size12; ++_i14) {
+          var elem15 = null;
+          elem15 = {};
+          var _rtmp317 = input.readMapBegin();
+          var _size16 = _rtmp317.size || 0;
+          for (var _i18 = 0; _i18 < _size16; ++_i18) {
+            var key19 = null;
+            var val20 = null;
+            key19 = input.readString();
+            val20 = input.readI32();
+            elem15[key19] = val20;
+          }
+          input.readMapEnd();
+          this.success.push(elem15);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+Bartender_test_function_maplist_result.prototype.write = function(output) {
+  output.writeStructBegin('Bartender_test_function_maplist_result');
+  if (this.success !== null && this.success !== undefined) {
+    output.writeFieldBegin('success', Thrift.Type.LIST, 0);
+    output.writeListBegin(Thrift.Type.MAP, this.success.length);
+    for (var iter21 in this.success) {
+      if (this.success.hasOwnProperty(iter21)) {
+        iter21 = this.success[iter21];
+        output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.I32, Thrift.objectLength(iter21));
+        for (var kiter22 in iter21) {
+          if (iter21.hasOwnProperty(kiter22)) {
+            var viter23 = iter21[kiter22];
+            output.writeString(kiter22);
+            output.writeI32(viter23);
+          }
+        }
+        output.writeMapEnd();
+      }
+    }
+    output.writeListEnd();
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -404,7 +554,7 @@ BartenderClient.prototype.recv_search_wines = function(input,mtype,rseqid) {
   return callback('search_wines failed: unknown result');
 };
 
-BartenderClient.prototype.test_function = function(input, callback) {
+BartenderClient.prototype.test_function_string = function(input, callback) {
   this._seqid = this.new_seqid();
   if (callback === undefined) {
     var _defer = Q.defer();
@@ -415,22 +565,22 @@ BartenderClient.prototype.test_function = function(input, callback) {
         _defer.resolve(result);
       }
     };
-    this.send_test_function(input);
+    this.send_test_function_string(input);
     return _defer.promise;
   } else {
     this._reqs[this.seqid()] = callback;
-    this.send_test_function(input);
+    this.send_test_function_string(input);
   }
 };
 
-BartenderClient.prototype.send_test_function = function(input) {
+BartenderClient.prototype.send_test_function_string = function(input) {
   var output = new this.pClass(this.output);
   var params = {
     input: input
   };
-  var args = new Bartender_test_function_args(params);
+  var args = new Bartender_test_function_string_args(params);
   try {
-    output.writeMessageBegin('test_function', Thrift.MessageType.CALL, this.seqid());
+    output.writeMessageBegin('test_function_string', Thrift.MessageType.CALL, this.seqid());
     args.write(output);
     output.writeMessageEnd();
     return this.output.flush();
@@ -444,7 +594,7 @@ BartenderClient.prototype.send_test_function = function(input) {
   }
 };
 
-BartenderClient.prototype.recv_test_function = function(input,mtype,rseqid) {
+BartenderClient.prototype.recv_test_function_string = function(input,mtype,rseqid) {
   var callback = this._reqs[rseqid] || function() {};
   delete this._reqs[rseqid];
   if (mtype == Thrift.MessageType.EXCEPTION) {
@@ -453,14 +603,73 @@ BartenderClient.prototype.recv_test_function = function(input,mtype,rseqid) {
     input.readMessageEnd();
     return callback(x);
   }
-  var result = new Bartender_test_function_result();
+  var result = new Bartender_test_function_string_result();
   result.read(input);
   input.readMessageEnd();
 
   if (null !== result.success) {
     return callback(null, result.success);
   }
-  return callback('test_function failed: unknown result');
+  return callback('test_function_string failed: unknown result');
+};
+
+BartenderClient.prototype.test_function_maplist = function(input, callback) {
+  this._seqid = this.new_seqid();
+  if (callback === undefined) {
+    var _defer = Q.defer();
+    this._reqs[this.seqid()] = function(error, result) {
+      if (error) {
+        _defer.reject(error);
+      } else {
+        _defer.resolve(result);
+      }
+    };
+    this.send_test_function_maplist(input);
+    return _defer.promise;
+  } else {
+    this._reqs[this.seqid()] = callback;
+    this.send_test_function_maplist(input);
+  }
+};
+
+BartenderClient.prototype.send_test_function_maplist = function(input) {
+  var output = new this.pClass(this.output);
+  var params = {
+    input: input
+  };
+  var args = new Bartender_test_function_maplist_args(params);
+  try {
+    output.writeMessageBegin('test_function_maplist', Thrift.MessageType.CALL, this.seqid());
+    args.write(output);
+    output.writeMessageEnd();
+    return this.output.flush();
+  }
+  catch (e) {
+    delete this._reqs[this.seqid()];
+    if (typeof output.reset === 'function') {
+      output.reset();
+    }
+    throw e;
+  }
+};
+
+BartenderClient.prototype.recv_test_function_maplist = function(input,mtype,rseqid) {
+  var callback = this._reqs[rseqid] || function() {};
+  delete this._reqs[rseqid];
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(input);
+    input.readMessageEnd();
+    return callback(x);
+  }
+  var result = new Bartender_test_function_maplist_result();
+  result.read(input);
+  input.readMessageEnd();
+
+  if (null !== result.success) {
+    return callback(null, result.success);
+  }
+  return callback('test_function_maplist failed: unknown result');
 };
 
 BartenderClient.prototype.ping = function(callback) {
@@ -610,36 +819,73 @@ BartenderProcessor.prototype.process_search_wines = function(seqid, input, outpu
     });
   }
 };
-BartenderProcessor.prototype.process_test_function = function(seqid, input, output) {
-  var args = new Bartender_test_function_args();
+BartenderProcessor.prototype.process_test_function_string = function(seqid, input, output) {
+  var args = new Bartender_test_function_string_args();
   args.read(input);
   input.readMessageEnd();
-  if (this._handler.test_function.length === 1) {
-    Q.fcall(this._handler.test_function.bind(this._handler),
+  if (this._handler.test_function_string.length === 1) {
+    Q.fcall(this._handler.test_function_string.bind(this._handler),
       args.input
     ).then(function(result) {
-      var result_obj = new Bartender_test_function_result({success: result});
-      output.writeMessageBegin("test_function", Thrift.MessageType.REPLY, seqid);
+      var result_obj = new Bartender_test_function_string_result({success: result});
+      output.writeMessageBegin("test_function_string", Thrift.MessageType.REPLY, seqid);
       result_obj.write(output);
       output.writeMessageEnd();
       output.flush();
     }).catch(function (err) {
       var result;
       result = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
-      output.writeMessageBegin("test_function", Thrift.MessageType.EXCEPTION, seqid);
+      output.writeMessageBegin("test_function_string", Thrift.MessageType.EXCEPTION, seqid);
       result.write(output);
       output.writeMessageEnd();
       output.flush();
     });
   } else {
-    this._handler.test_function(args.input, function (err, result) {
+    this._handler.test_function_string(args.input, function (err, result) {
       var result_obj;
       if ((err === null || typeof err === 'undefined')) {
-        result_obj = new Bartender_test_function_result((err !== null || typeof err === 'undefined') ? err : {success: result});
-        output.writeMessageBegin("test_function", Thrift.MessageType.REPLY, seqid);
+        result_obj = new Bartender_test_function_string_result((err !== null || typeof err === 'undefined') ? err : {success: result});
+        output.writeMessageBegin("test_function_string", Thrift.MessageType.REPLY, seqid);
       } else {
         result_obj = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
-        output.writeMessageBegin("test_function", Thrift.MessageType.EXCEPTION, seqid);
+        output.writeMessageBegin("test_function_string", Thrift.MessageType.EXCEPTION, seqid);
+      }
+      result_obj.write(output);
+      output.writeMessageEnd();
+      output.flush();
+    });
+  }
+};
+BartenderProcessor.prototype.process_test_function_maplist = function(seqid, input, output) {
+  var args = new Bartender_test_function_maplist_args();
+  args.read(input);
+  input.readMessageEnd();
+  if (this._handler.test_function_maplist.length === 1) {
+    Q.fcall(this._handler.test_function_maplist.bind(this._handler),
+      args.input
+    ).then(function(result) {
+      var result_obj = new Bartender_test_function_maplist_result({success: result});
+      output.writeMessageBegin("test_function_maplist", Thrift.MessageType.REPLY, seqid);
+      result_obj.write(output);
+      output.writeMessageEnd();
+      output.flush();
+    }).catch(function (err) {
+      var result;
+      result = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
+      output.writeMessageBegin("test_function_maplist", Thrift.MessageType.EXCEPTION, seqid);
+      result.write(output);
+      output.writeMessageEnd();
+      output.flush();
+    });
+  } else {
+    this._handler.test_function_maplist(args.input, function (err, result) {
+      var result_obj;
+      if ((err === null || typeof err === 'undefined')) {
+        result_obj = new Bartender_test_function_maplist_result((err !== null || typeof err === 'undefined') ? err : {success: result});
+        output.writeMessageBegin("test_function_maplist", Thrift.MessageType.REPLY, seqid);
+      } else {
+        result_obj = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
+        output.writeMessageBegin("test_function_maplist", Thrift.MessageType.EXCEPTION, seqid);
       }
       result_obj.write(output);
       output.writeMessageEnd();
