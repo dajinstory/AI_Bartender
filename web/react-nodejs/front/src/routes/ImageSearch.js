@@ -47,7 +47,7 @@ class ImageSearch extends React.Component {
   render() {
     const { file, isLoading, wines} = this.state;
     return (
-        <section>
+        <section className = "wines__container">
           {isLoading ? (
               <div className="image_search__container">
                 <form onSubmit={this.onFormSubmit}>
@@ -57,19 +57,17 @@ class ImageSearch extends React.Component {
                 </form>
               </div>
           ) : (
-              <div className="wines__container">
-                <div className="wines">
-                  {wines.map(wine => (
-                      <Wine
-                          key={wine.x}
-                          id={wine.x}
-                          year={wine.len_x}
-                          title={'name'}
-                          summary={'summary'}
-                          poster={null}
-                      />
-                  ))}
-                </div>
+              <div className="wines">
+                {wines.map(wine => (
+                    <Wine
+                        key={wine.x}
+                        id={wine.x}
+                        year={wine.len_x}
+                        title={'name'}
+                        summary={'summary'}
+                        poster={null}
+                    />
+                ))}
               </div>
           )}
         </section>
