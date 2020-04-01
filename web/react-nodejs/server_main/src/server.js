@@ -9,6 +9,8 @@ const multer = require('multer');
 const moment = require('moment');
 const cors = require('cors')
 
+//const default_image = require('../images/default.png')
+
 
 // server settings...
 app.use(cors())
@@ -86,13 +88,16 @@ app.post("/upload", (req, res, next) => {
       });
     });
 
-    return res.json({success:1})
+    // call search_wines function. (test_function: test_function_maplist)
+    wines = client.test_function_maplist("test_function_maplist", function(err, response) {
+      if (err) {
+        console.log("error : " + err)
+      } else {
+        console.log('maplist - first wineobj: ' + response[0]['x'] + response[0]['y'] + response[0]['len_x'] + response[0]['len_y'] + response[0]['label']);
+      }
+      //return res.json({success:1, wines:response, default_image:default_image})
+      return res.json({success:1, wines:response})
+
+    });
   });
 });
-
-// image result
-app.get("/image_search", (req, res, next) => {
-  console.log("get call")
-  res.result="end"
-});
-

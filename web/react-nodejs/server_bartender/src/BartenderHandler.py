@@ -145,6 +145,11 @@ class BartenderHandler:
         wines = []
         wines.append(wine)
         wines.append(wine)
+        wines.append(wine)
+        wines.append(wine)
+        wines.append(wine)
+        wines.append(wine)
+        wines.append(wine)
         for w in wines:
             print(w)
 

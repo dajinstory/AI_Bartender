@@ -1,19 +1,22 @@
-import "./ImageSearch.css";
 import React, { Component } from 'react'
 import axios from 'axios';
+import Wine from "../components/Wine";
+import "./ImageSearch.css";
 
-class ImageSearch extends Component {
+class ImageSearch extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      file: null
+      file: null,
+      isLoading: true,
+      wines: [],
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
-  onFormSubmit(e) {
-      // preventdefault action
+  onFormSubmit = async(e) => {
+      // prevent default action
       e.preventDefault();
 
       // set params
@@ -26,21 +29,15 @@ class ImageSearch extends Component {
       };
 
       // call post
-      axios.post("http://localhost:8000/upload", formData, config)
+      const search_response = axios.post("http://localhost:8000/upload", formData, config)
           .then((response) => {
-              alert("successfully uploaded");
+              //alert("successfully uploaded and success : " + String(response["data"]["wines"]));
+              alert("successfully uploaded" + String(JSON.stringify(response)));
+              this.setState({ wines: response["data"]["wines"], isLoading: false });
           }).catch((error) => {
-              alert("fail to upload image");
+              alert("fail to upload image" + error);
           }
       );
-
-      const result = axios.get("http://localhost:8000/image_search", formData, config)
-          .then((response)=>{
-              alert(response.result)
-          }).catch((error)=>{
-              alert('failfail')
-      })
-      console.log(result)
   }
 
   onChange(e){
@@ -48,18 +45,37 @@ class ImageSearch extends Component {
   }
 
   render() {
+    const { file, isLoading, wines} = this.state;
     return (
-        ///
-        <div className="image_search__container">
-            <form onSubmit={this.onFormSubmit}>
-                <h2> File Upload </h2>
-                <input type="file" name="selected_image" onChange={this.onChange}/>
-                <button type="submit">Upload</button>
-            </form>
-            <h2 id="result"></h2>
-        </div>
+        <section>
+          {isLoading ? (
+              <div className="image_search__container">
+                <form onSubmit={this.onFormSubmit}>
+                  <h2> File Upload </h2>
+                  <input type="file" name="selected_image" onChange={this.onChange}/>
+                  <button type="submit">Search</button>
+                </form>
+              </div>
+          ) : (
+              <div className="wines__container">
+                <div className="wines">
+                  {wines.map(wine => (
+                      <Wine
+                          key={wine.x}
+                          id={wine.x}
+                          year={wine.len_x}
+                          title={'name'}
+                          summary={'summary'}
+                          poster={null}
+                      />
+                  ))}
+                </div>
+              </div>
+          )}
+        </section>
     )
   }
 }
 
 export default ImageSearch
+

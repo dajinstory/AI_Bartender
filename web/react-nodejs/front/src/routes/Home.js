@@ -9,6 +9,10 @@ class Home extends React.Component {
     wines: []
   };
   getWines = async () => {
+    const tmp = await axios.get(
+        "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
+    );
+    alert(JSON.stringify(tmp))
     const {
       data: {
         data: { movies }
@@ -39,7 +43,6 @@ class Home extends React.Component {
                 title={wine.title}
                 summary={wine.summary}
                 poster={wine.medium_cover_image}
-                genres={wine.genres}
               />
             ))}
           </div>
