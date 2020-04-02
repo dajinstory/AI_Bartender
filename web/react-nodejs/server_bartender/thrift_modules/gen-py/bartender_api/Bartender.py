@@ -20,7 +20,31 @@ all_structs = []
 
 
 class Iface(shared.SharedService.Iface):
-    def search_wines(self, filename):
+    def get_wines(self, filename):
+        """
+        Parameters:
+         - filename
+
+        """
+        pass
+
+    def proto_get_objects(self, filename):
+        """
+        Parameters:
+         - filename
+
+        """
+        pass
+
+    def proto_get_vectors(self, filename):
+        """
+        Parameters:
+         - filename
+
+        """
+        pass
+
+    def proto_get_labels(self, filename):
         """
         Parameters:
          - filename
@@ -48,12 +72,6 @@ class Iface(shared.SharedService.Iface):
         pass
 
     def zip(self):
-        """
-        This method has a oneway modifier. That means the client only makes
-        a request and does not listen for any response at all. Oneway methods
-        must be void.
-
-        """
         pass
 
 
@@ -61,24 +79,24 @@ class Client(shared.SharedService.Client, Iface):
     def __init__(self, iprot, oprot=None):
         shared.SharedService.Client.__init__(self, iprot, oprot)
 
-    def search_wines(self, filename):
+    def get_wines(self, filename):
         """
         Parameters:
          - filename
 
         """
-        self.send_search_wines(filename)
-        return self.recv_search_wines()
+        self.send_get_wines(filename)
+        return self.recv_get_wines()
 
-    def send_search_wines(self, filename):
-        self._oprot.writeMessageBegin('search_wines', TMessageType.CALL, self._seqid)
-        args = search_wines_args()
+    def send_get_wines(self, filename):
+        self._oprot.writeMessageBegin('get_wines', TMessageType.CALL, self._seqid)
+        args = get_wines_args()
         args.filename = filename
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
 
-    def recv_search_wines(self):
+    def recv_get_wines(self):
         iprot = self._iprot
         (fname, mtype, rseqid) = iprot.readMessageBegin()
         if mtype == TMessageType.EXCEPTION:
@@ -86,12 +104,108 @@ class Client(shared.SharedService.Client, Iface):
             x.read(iprot)
             iprot.readMessageEnd()
             raise x
-        result = search_wines_result()
+        result = get_wines_result()
         result.read(iprot)
         iprot.readMessageEnd()
         if result.success is not None:
             return result.success
-        raise TApplicationException(TApplicationException.MISSING_RESULT, "search_wines failed: unknown result")
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "get_wines failed: unknown result")
+
+    def proto_get_objects(self, filename):
+        """
+        Parameters:
+         - filename
+
+        """
+        self.send_proto_get_objects(filename)
+        return self.recv_proto_get_objects()
+
+    def send_proto_get_objects(self, filename):
+        self._oprot.writeMessageBegin('proto_get_objects', TMessageType.CALL, self._seqid)
+        args = proto_get_objects_args()
+        args.filename = filename
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_proto_get_objects(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = proto_get_objects_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "proto_get_objects failed: unknown result")
+
+    def proto_get_vectors(self, filename):
+        """
+        Parameters:
+         - filename
+
+        """
+        self.send_proto_get_vectors(filename)
+        return self.recv_proto_get_vectors()
+
+    def send_proto_get_vectors(self, filename):
+        self._oprot.writeMessageBegin('proto_get_vectors', TMessageType.CALL, self._seqid)
+        args = proto_get_vectors_args()
+        args.filename = filename
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_proto_get_vectors(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = proto_get_vectors_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "proto_get_vectors failed: unknown result")
+
+    def proto_get_labels(self, filename):
+        """
+        Parameters:
+         - filename
+
+        """
+        self.send_proto_get_labels(filename)
+        return self.recv_proto_get_labels()
+
+    def send_proto_get_labels(self, filename):
+        self._oprot.writeMessageBegin('proto_get_labels', TMessageType.CALL, self._seqid)
+        args = proto_get_labels_args()
+        args.filename = filename
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_proto_get_labels(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = proto_get_labels_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "proto_get_labels failed: unknown result")
 
     def test_function_string(self, input):
         """
@@ -182,12 +296,6 @@ class Client(shared.SharedService.Client, Iface):
         return
 
     def zip(self):
-        """
-        This method has a oneway modifier. That means the client only makes
-        a request and does not listen for any response at all. Oneway methods
-        must be void.
-
-        """
         self.send_zip()
 
     def send_zip(self):
@@ -201,7 +309,10 @@ class Client(shared.SharedService.Client, Iface):
 class Processor(shared.SharedService.Processor, Iface, TProcessor):
     def __init__(self, handler):
         shared.SharedService.Processor.__init__(self, handler)
-        self._processMap["search_wines"] = Processor.process_search_wines
+        self._processMap["get_wines"] = Processor.process_get_wines
+        self._processMap["proto_get_objects"] = Processor.process_proto_get_objects
+        self._processMap["proto_get_vectors"] = Processor.process_proto_get_vectors
+        self._processMap["proto_get_labels"] = Processor.process_proto_get_labels
         self._processMap["test_function_string"] = Processor.process_test_function_string
         self._processMap["test_function_maplist"] = Processor.process_test_function_maplist
         self._processMap["ping"] = Processor.process_ping
@@ -228,13 +339,13 @@ class Processor(shared.SharedService.Processor, Iface, TProcessor):
             self._processMap[name](self, seqid, iprot, oprot)
         return True
 
-    def process_search_wines(self, seqid, iprot, oprot):
-        args = search_wines_args()
+    def process_get_wines(self, seqid, iprot, oprot):
+        args = get_wines_args()
         args.read(iprot)
         iprot.readMessageEnd()
-        result = search_wines_result()
+        result = get_wines_result()
         try:
-            result.success = self._handler.search_wines(args.filename)
+            result.success = self._handler.get_wines(args.filename)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -246,7 +357,76 @@ class Processor(shared.SharedService.Processor, Iface, TProcessor):
             logging.exception('Unexpected exception in handler')
             msg_type = TMessageType.EXCEPTION
             result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
-        oprot.writeMessageBegin("search_wines", msg_type, seqid)
+        oprot.writeMessageBegin("get_wines", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
+    def process_proto_get_objects(self, seqid, iprot, oprot):
+        args = proto_get_objects_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = proto_get_objects_result()
+        try:
+            result.success = self._handler.proto_get_objects(args.filename)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("proto_get_objects", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
+    def process_proto_get_vectors(self, seqid, iprot, oprot):
+        args = proto_get_vectors_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = proto_get_vectors_result()
+        try:
+            result.success = self._handler.proto_get_vectors(args.filename)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("proto_get_vectors", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
+    def process_proto_get_labels(self, seqid, iprot, oprot):
+        args = proto_get_labels_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = proto_get_labels_result()
+        try:
+            result.success = self._handler.proto_get_labels(args.filename)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("proto_get_labels", msg_type, seqid)
         result.write(oprot)
         oprot.writeMessageEnd()
         oprot.trans.flush()
@@ -334,7 +514,7 @@ class Processor(shared.SharedService.Processor, Iface, TProcessor):
 # HELPER FUNCTIONS AND STRUCTURES
 
 
-class search_wines_args(object):
+class get_wines_args(object):
     """
     Attributes:
      - filename
@@ -368,7 +548,7 @@ class search_wines_args(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('search_wines_args')
+        oprot.writeStructBegin('get_wines_args')
         if self.filename is not None:
             oprot.writeFieldBegin('filename', TType.STRING, 1)
             oprot.writeString(self.filename.encode('utf-8') if sys.version_info[0] == 2 else self.filename)
@@ -389,14 +569,14 @@ class search_wines_args(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(search_wines_args)
-search_wines_args.thrift_spec = (
+all_structs.append(get_wines_args)
+get_wines_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'filename', 'UTF8', None, ),  # 1
 )
 
 
-class search_wines_result(object):
+class get_wines_result(object):
     """
     Attributes:
      - success
@@ -425,7 +605,7 @@ class search_wines_result(object):
                         (_ktype7, _vtype8, _size6) = iprot.readMapBegin()
                         for _i10 in range(_size6):
                             _key11 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                            _val12 = iprot.readI32()
+                            _val12 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                             _elem5[_key11] = _val12
                         iprot.readMapEnd()
                         self.success.append(_elem5)
@@ -441,15 +621,15 @@ class search_wines_result(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('search_wines_result')
+        oprot.writeStructBegin('get_wines_result')
         if self.success is not None:
             oprot.writeFieldBegin('success', TType.LIST, 0)
             oprot.writeListBegin(TType.MAP, len(self.success))
             for iter13 in self.success:
-                oprot.writeMapBegin(TType.STRING, TType.I32, len(iter13))
+                oprot.writeMapBegin(TType.STRING, TType.STRING, len(iter13))
                 for kiter14, viter15 in iter13.items():
                     oprot.writeString(kiter14.encode('utf-8') if sys.version_info[0] == 2 else kiter14)
-                    oprot.writeI32(viter15)
+                    oprot.writeString(viter15.encode('utf-8') if sys.version_info[0] == 2 else viter15)
                 oprot.writeMapEnd()
             oprot.writeListEnd()
             oprot.writeFieldEnd()
@@ -469,9 +649,432 @@ class search_wines_result(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(search_wines_result)
-search_wines_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.MAP, (TType.STRING, 'UTF8', TType.I32, None, False), False), None, ),  # 0
+all_structs.append(get_wines_result)
+get_wines_result.thrift_spec = (
+    (0, TType.LIST, 'success', (TType.MAP, (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), False), None, ),  # 0
+)
+
+
+class proto_get_objects_args(object):
+    """
+    Attributes:
+     - filename
+
+    """
+
+
+    def __init__(self, filename=None,):
+        self.filename = filename
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.filename = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('proto_get_objects_args')
+        if self.filename is not None:
+            oprot.writeFieldBegin('filename', TType.STRING, 1)
+            oprot.writeString(self.filename.encode('utf-8') if sys.version_info[0] == 2 else self.filename)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(proto_get_objects_args)
+proto_get_objects_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'filename', 'UTF8', None, ),  # 1
+)
+
+
+class proto_get_objects_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.LIST:
+                    self.success = []
+                    (_etype19, _size16) = iprot.readListBegin()
+                    for _i20 in range(_size16):
+                        _elem21 = {}
+                        (_ktype23, _vtype24, _size22) = iprot.readMapBegin()
+                        for _i26 in range(_size22):
+                            _key27 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _val28 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _elem21[_key27] = _val28
+                        iprot.readMapEnd()
+                        self.success.append(_elem21)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('proto_get_objects_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.LIST, 0)
+            oprot.writeListBegin(TType.MAP, len(self.success))
+            for iter29 in self.success:
+                oprot.writeMapBegin(TType.STRING, TType.STRING, len(iter29))
+                for kiter30, viter31 in iter29.items():
+                    oprot.writeString(kiter30.encode('utf-8') if sys.version_info[0] == 2 else kiter30)
+                    oprot.writeString(viter31.encode('utf-8') if sys.version_info[0] == 2 else viter31)
+                oprot.writeMapEnd()
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(proto_get_objects_result)
+proto_get_objects_result.thrift_spec = (
+    (0, TType.LIST, 'success', (TType.MAP, (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), False), None, ),  # 0
+)
+
+
+class proto_get_vectors_args(object):
+    """
+    Attributes:
+     - filename
+
+    """
+
+
+    def __init__(self, filename=None,):
+        self.filename = filename
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.filename = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('proto_get_vectors_args')
+        if self.filename is not None:
+            oprot.writeFieldBegin('filename', TType.STRING, 1)
+            oprot.writeString(self.filename.encode('utf-8') if sys.version_info[0] == 2 else self.filename)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(proto_get_vectors_args)
+proto_get_vectors_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'filename', 'UTF8', None, ),  # 1
+)
+
+
+class proto_get_vectors_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.LIST:
+                    self.success = []
+                    (_etype35, _size32) = iprot.readListBegin()
+                    for _i36 in range(_size32):
+                        _elem37 = {}
+                        (_ktype39, _vtype40, _size38) = iprot.readMapBegin()
+                        for _i42 in range(_size38):
+                            _key43 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _val44 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _elem37[_key43] = _val44
+                        iprot.readMapEnd()
+                        self.success.append(_elem37)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('proto_get_vectors_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.LIST, 0)
+            oprot.writeListBegin(TType.MAP, len(self.success))
+            for iter45 in self.success:
+                oprot.writeMapBegin(TType.STRING, TType.STRING, len(iter45))
+                for kiter46, viter47 in iter45.items():
+                    oprot.writeString(kiter46.encode('utf-8') if sys.version_info[0] == 2 else kiter46)
+                    oprot.writeString(viter47.encode('utf-8') if sys.version_info[0] == 2 else viter47)
+                oprot.writeMapEnd()
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(proto_get_vectors_result)
+proto_get_vectors_result.thrift_spec = (
+    (0, TType.LIST, 'success', (TType.MAP, (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), False), None, ),  # 0
+)
+
+
+class proto_get_labels_args(object):
+    """
+    Attributes:
+     - filename
+
+    """
+
+
+    def __init__(self, filename=None,):
+        self.filename = filename
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.filename = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('proto_get_labels_args')
+        if self.filename is not None:
+            oprot.writeFieldBegin('filename', TType.STRING, 1)
+            oprot.writeString(self.filename.encode('utf-8') if sys.version_info[0] == 2 else self.filename)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(proto_get_labels_args)
+proto_get_labels_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'filename', 'UTF8', None, ),  # 1
+)
+
+
+class proto_get_labels_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.LIST:
+                    self.success = []
+                    (_etype51, _size48) = iprot.readListBegin()
+                    for _i52 in range(_size48):
+                        _elem53 = {}
+                        (_ktype55, _vtype56, _size54) = iprot.readMapBegin()
+                        for _i58 in range(_size54):
+                            _key59 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _val60 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _elem53[_key59] = _val60
+                        iprot.readMapEnd()
+                        self.success.append(_elem53)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('proto_get_labels_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.LIST, 0)
+            oprot.writeListBegin(TType.MAP, len(self.success))
+            for iter61 in self.success:
+                oprot.writeMapBegin(TType.STRING, TType.STRING, len(iter61))
+                for kiter62, viter63 in iter61.items():
+                    oprot.writeString(kiter62.encode('utf-8') if sys.version_info[0] == 2 else kiter62)
+                    oprot.writeString(viter63.encode('utf-8') if sys.version_info[0] == 2 else viter63)
+                oprot.writeMapEnd()
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(proto_get_labels_result)
+proto_get_labels_result.thrift_spec = (
+    (0, TType.LIST, 'success', (TType.MAP, (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), False), None, ),  # 0
 )
 
 
@@ -683,16 +1286,16 @@ class test_function_maplist_result(object):
             if fid == 0:
                 if ftype == TType.LIST:
                     self.success = []
-                    (_etype19, _size16) = iprot.readListBegin()
-                    for _i20 in range(_size16):
-                        _elem21 = {}
-                        (_ktype23, _vtype24, _size22) = iprot.readMapBegin()
-                        for _i26 in range(_size22):
-                            _key27 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                            _val28 = iprot.readI32()
-                            _elem21[_key27] = _val28
+                    (_etype67, _size64) = iprot.readListBegin()
+                    for _i68 in range(_size64):
+                        _elem69 = {}
+                        (_ktype71, _vtype72, _size70) = iprot.readMapBegin()
+                        for _i74 in range(_size70):
+                            _key75 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _val76 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                            _elem69[_key75] = _val76
                         iprot.readMapEnd()
-                        self.success.append(_elem21)
+                        self.success.append(_elem69)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -709,11 +1312,11 @@ class test_function_maplist_result(object):
         if self.success is not None:
             oprot.writeFieldBegin('success', TType.LIST, 0)
             oprot.writeListBegin(TType.MAP, len(self.success))
-            for iter29 in self.success:
-                oprot.writeMapBegin(TType.STRING, TType.I32, len(iter29))
-                for kiter30, viter31 in iter29.items():
-                    oprot.writeString(kiter30.encode('utf-8') if sys.version_info[0] == 2 else kiter30)
-                    oprot.writeI32(viter31)
+            for iter77 in self.success:
+                oprot.writeMapBegin(TType.STRING, TType.STRING, len(iter77))
+                for kiter78, viter79 in iter77.items():
+                    oprot.writeString(kiter78.encode('utf-8') if sys.version_info[0] == 2 else kiter78)
+                    oprot.writeString(viter79.encode('utf-8') if sys.version_info[0] == 2 else viter79)
                 oprot.writeMapEnd()
             oprot.writeListEnd()
             oprot.writeFieldEnd()
@@ -735,7 +1338,7 @@ class test_function_maplist_result(object):
         return not (self == other)
 all_structs.append(test_function_maplist_result)
 test_function_maplist_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.MAP, (TType.STRING, 'UTF8', TType.I32, None, False), False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.MAP, (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), False), None, ),  # 0
 )
 
 

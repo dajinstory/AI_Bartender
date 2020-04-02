@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import axios from 'axios';
 import Wine from "../components/Wine";
 import "./ImageSearch.css";
@@ -8,11 +8,16 @@ class ImageSearch extends React.Component {
     super(props);
     this.state = {
       file: null,
+      filename: null,
       isLoading: true,
       wines: [],
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  onChange = async(e) =>{
+    this.setState({file:e.target.files[0]})
   }
 
   onFormSubmit = async(e) => {
@@ -29,7 +34,7 @@ class ImageSearch extends React.Component {
       };
 
       // call post
-      const search_response = axios.post("http://localhost:8000/upload", formData, config)
+      axios.post("http://localhost:11000/upload", formData, config)
           .then((response) => {
               //alert("successfully uploaded and success : " + String(response["data"]["wines"]));
               alert("successfully uploaded" + String(JSON.stringify(response)));
@@ -40,16 +45,13 @@ class ImageSearch extends React.Component {
       );
   }
 
-  onChange(e){
-      this.setState({file:e.target.files[0]})
-  }
 
   render() {
     const { file, isLoading, wines} = this.state;
     return (
-        <section className = "wines__container">
+        <section className = "container">
           {isLoading ? (
-              <div className="image_search__container">
+              <div className="search__container">
                 <form onSubmit={this.onFormSubmit}>
                   <h2> File Upload </h2>
                   <input type="file" name="selected_image" onChange={this.onChange}/>

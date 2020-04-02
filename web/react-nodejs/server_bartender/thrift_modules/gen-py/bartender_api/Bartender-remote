@@ -24,7 +24,10 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('Usage: ' + sys.argv[0] + ' [-h host[:port]] [-u url] [-f[ramed]] [-s[sl]] [-novalidate] [-ca_certs certs] [-keyfile keyfile] [-certfile certfile] function [arg1 [arg2...]]')
     print('')
     print('Functions:')
-    print('   search_wines(string filename)')
+    print('   get_wines(string filename)')
+    print('   proto_get_objects(string filename)')
+    print('   proto_get_vectors(string filename)')
+    print('   proto_get_labels(string filename)')
     print('  string test_function_string(string input)')
     print('   test_function_maplist(string input)')
     print('  void ping()')
@@ -109,11 +112,29 @@ protocol = TBinaryProtocol(transport)
 client = Bartender.Client(protocol)
 transport.open()
 
-if cmd == 'search_wines':
+if cmd == 'get_wines':
     if len(args) != 1:
-        print('search_wines requires 1 args')
+        print('get_wines requires 1 args')
         sys.exit(1)
-    pp.pprint(client.search_wines(args[0],))
+    pp.pprint(client.get_wines(args[0],))
+
+elif cmd == 'proto_get_objects':
+    if len(args) != 1:
+        print('proto_get_objects requires 1 args')
+        sys.exit(1)
+    pp.pprint(client.proto_get_objects(args[0],))
+
+elif cmd == 'proto_get_vectors':
+    if len(args) != 1:
+        print('proto_get_vectors requires 1 args')
+        sys.exit(1)
+    pp.pprint(client.proto_get_vectors(args[0],))
+
+elif cmd == 'proto_get_labels':
+    if len(args) != 1:
+        print('proto_get_labels requires 1 args')
+        sys.exit(1)
+    pp.pprint(client.proto_get_labels(args[0],))
 
 elif cmd == 'test_function_string':
     if len(args) != 1:

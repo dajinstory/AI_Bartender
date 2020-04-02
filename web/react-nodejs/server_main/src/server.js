@@ -14,8 +14,8 @@ const cors = require('cors')
 
 // server settings...
 app.use(cors())
-app.listen(8000, function(){
-  console.log("app listening to port 8000")
+app.listen(11000, function(){
+  console.log("app listening to port 11000")
 });
 
 
@@ -38,7 +38,7 @@ var upload = multer({storage: image_storage}).single("selected_image");
 var transport = thrift.TBufferedTransport;
 var protocol = thrift.TBinaryProtocol;
 
-var connection = thrift.createConnection("localhost", 10101, {
+var connection = thrift.createConnection("localhost", 12000, {
     transport : transport,
     protocol : protocol
 });
