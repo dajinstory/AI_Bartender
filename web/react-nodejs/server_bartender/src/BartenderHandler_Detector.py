@@ -2,6 +2,7 @@ import glob
 import sys
 import time
 import cv2
+import json
 
 #sys.path.insert(0, glob.glob('C:\\Users\\DajinHan\\Anaconda3\\envs\\ai_bartender\\Lib\\*')[0])
 
@@ -79,9 +80,12 @@ class BartenderHandler:
         # load image
         src = cv2.imread(filename, cv2.IMREAD_COLOR)
         objects = self.get_objects(src)
-        
+
         # convert data to string format
-        json_objects = JSON.stringify(objects)
+        for object in objects:
+            for key in object.keys():
+                object[key]=object[key].item()
+        json_objects = json.dumps(objects)
         return json_objects
 
     def proto_get_vectors(self, filename):

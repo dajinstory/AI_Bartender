@@ -47,3 +47,12 @@
   padding-top: 70px;
   width: 80%;
 }
+.objects {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 50px;
+  padding-top: 70px;
+  width: 80%;
+}
