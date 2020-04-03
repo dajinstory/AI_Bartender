@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf
 import cv2
 
-from SSD import *
+from SSD import * # 이렇게하면 바로 SSD.ssd.SSD300() 식으로 호출가능
 from SSD.ssd import SSD300
 from SSD.ssd_utils import BBoxUtility
 
@@ -47,7 +47,7 @@ class Detector:
         # load ssd
         NUM_CLASSES = len(self.classes) + 1
         detector = SSD300(self.resolution, num_classes=NUM_CLASSES)
-        detector.load_weights('./SSD/model/weights_SSD300.hdf5')
+        detector.load_weights('./SSD/weights/weights_SSD300.hdf5')
 
         return detector
 
@@ -235,7 +235,7 @@ class Detector:
 
 
 if __name__ == "__main__":
-    image = cv2.imread('../../../../../images/2.jpg', cv2.IMREAD_COLOR)
+    image = cv2.imread('../../../images/3.png', cv2.IMREAD_COLOR)
     detector = Detector()
     result = detector.get_objects(image)
     print(result)
