@@ -131,9 +131,9 @@ class ProtoType extends React.Component {
             <div className="wines">
               {wines.map(wine => (
                   <Wine
-                      id={wine.label ? (wine.id):("NO ID")}
-                      year={wine.year ? (wine.year):("NO YEAR")}
-                      title={wine.name ? (wine.name):("NO NAME")}
+                      id={wine.label ? (wine.id):(4112)}
+                      year={wine.year ? (wine.year):(4112)}
+                      title={wine.name ? (wine.name):(wine.r + wine.c + wine.)}
                       summary={wine.summary ? (wine.summary):("NO DESCRIPTION")}
                       poster={wine.poster ? (wine.poster):(null)}
                   />
