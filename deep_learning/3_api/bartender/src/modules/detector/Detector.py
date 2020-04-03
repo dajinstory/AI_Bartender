@@ -1,5 +1,6 @@
 import warnings
-warnings.simplefilter("ignore", UserWarning)
+warnings.simplefilter(action="ignore", category=UserWarning)
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 import cv2
 from keras.backend.tensorflow_backend import set_session
@@ -44,7 +45,7 @@ class Detector:
         # load ssd
         NUM_CLASSES = len(self.classes) + 1
         detector = SSD300(self.input_shape, num_classes=NUM_CLASSES)
-        detector.load_weights('./SSD/weights_SSD300.hdf5')
+        detector.load_weights('./SSD/model/weights_SSD300.hdf5')
 
         return detector
 
@@ -194,6 +195,7 @@ class Detector:
 
     # Main Function
     def get_objects(self, image):
+
         # divide images
         divided_images, coord = self.divide_by_grid(image)
 

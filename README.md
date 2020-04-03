@@ -1,5 +1,10 @@
 # AI_Bartender
 
+### ENV
+- python		-	3.7
+- tensorflow	-	1.13.1
+- keras 		-	2.2.4
+
 ### Neural Network
 1. lecture - <https://edu.goorm.io/search?subject=%EB%AA%A8%EB%91%90%EC%9D%98%20%EB%94%A5%EB%9F%AC%EB%8B%9D>
 2. concept - <https://gomguard.tistory.com/category/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D?>

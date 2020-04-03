@@ -1,5 +1,6 @@
 import warnings
-warnings.simplefilter("ignore", UserWarning)
+warnings.simplefilter(action="ignore", category=UserWarning)
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 """Some special pupropse layers for SSD."""
 import keras.backend as K
