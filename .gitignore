@@ -121,3 +121,4 @@ venv.bak/
 #.web/react-nodejs/ai_bartender/node_modules
 web/react-nodejs/ai_bartender/.idea
 web/react-nodejs/ai_bartender/node_modules
+node_modules/
