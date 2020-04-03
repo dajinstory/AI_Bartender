@@ -12,14 +12,6 @@ namespace netstd bartender_api
 
 const i32 INT32CONSTANT = 9853
 
-struct WineInfo {
-  1: i64 x,
-  2: i64 y,
-  3: i64 len_x,
-  4: i64 len_y,
-  5: i64 label,
-}
-
 exception InvalidOperation {
   1: i32 whatOp,
   2: string why
@@ -28,14 +20,19 @@ exception InvalidOperation {
 
 service Bartender extends shared.SharedService {
 
-   list<WineInfo> search_wines(1:string filename),
-   string test_function(1:string input),
-   void ping(),
-   /**
-    * This method has a oneway modifier. That means the client only makes
-    * a request and does not listen for any response at all. Oneway methods
-    * must be void.
-    */
-   oneway void zip()
+  // main api
+  list<map<string,string>> get_wines(1:string filename),
+
+  // prototype api
+  list<map<string,string>> proto_get_objects(1:string filename),
+  list<map<string,string>> proto_get_vectors(1:string filename),
+  list<map<string,string>> proto_get_labels(1:string filename),
+
+
+  // functions to check thrift connection
+  string test_function_string(1:string input),
+  list<map<string,string>> test_function_maplist(1:string input),
+  void ping(),
+  oneway void zip()
 
 }

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b5828c03-0da1-44b3-a280-8267ca55d400" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bartender/src/modules/detector/Detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/bartender/src/modules/detector/Detector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bartender/src/modules/detector/SSD/ssd.py" beforeDir="false" afterPath="$PROJECT_DIR$/bartender/src/modules/detector/SSD/ssd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bartender/src/modules/detector/SSD/ssd_layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/bartender/src/modules/detector/SSD/ssd_layers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bartender/src/modules/detector/SSD/ssd_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/bartender/src/modules/detector/SSD/ssd_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bartender/src/modules/detector/SSD/weights_SSD300.hdf5" beforeDir="false" afterPath="$PROJECT_DIR$/bartender/src/modules/detector/SSD/model/weights_SSD300.hdf5" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="JupyterTrust" id="84e5fa9e-1c06-4591-8a10-e32cf8e7bf06" />
+  <component name="ProjectId" id="1a16tqFgdWKGSPGzvZrtvbgXRCh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/bartender/src/modules/detector/SSD" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="3_api" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="3_api" />
+        <option name="myAddContentRoots" value="false" />
+        <option name="myAddSourceRoots" value="false" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DajinHan\Desktop\Projects\AI_Bartender\deep_learning\3_api\bartender\src\modules\detector\SSD\model" />
+      <recent name="C:\Users\DajinHan\Desktop\Projects\AI_Bartender\deep_learning\3_api\bartender\src\modules\classifier\SSD" />
+      <recent name="C:\Users\DajinHan\Desktop\Projects\AI_Bartender\deep_learning\3_api\bartender\src" />
+      <recent name="C:\Users\DajinHan\Desktop\Projects\AI_Bartender\deep_learning\3_api\bartender\src\modules\vectorizer" />
+      <recent name="C:\Users\DajinHan\Desktop\Projects\AI_Bartender\deep_learning\3_api\bartender\src\modules\detector" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\DajinHan\Desktop\Projects\AI_Bartender\deep_learning\3_api\bartender\src\modules\detector\SSD" />
+      <recent name="C:\Users\DajinHan\Desktop\Projects\AI_Bartender\deep_learning\3_api\bartender\src\modules\detector" />
+      <recent name="C:\Users\DajinHan\Desktop\Projects\AI_Bartender\deep_learning\3_api\bartender\src\modules\classifier\SSD" />
+      <recent name="C:\Users\DajinHan\Desktop\Projects\AI_Bartender\deep_learning\3_api" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Detector">
+    <configuration name="Detector" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="3_api" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bartender/src/modules/detector" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bartender/src/modules/detector/Detector.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="WineModuleHandler" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="3_api" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/prototype" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/prototype/WineModuleHandler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Detector" />
+      <item itemvalue="Python.WineModuleHandler" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Detector" />
+        <item itemvalue="Python.WineModuleHandler" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b5828c03-0da1-44b3-a280-8267ca55d400" name="Default Changelist" comment="" />
+      <created>1585890969997</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585890969997</updated>
+      <workItem from="1585890979936" duration="481000" />
+      <workItem from="1585891480533" duration="3906000" />
+      <workItem from="1585895419726" duration="68000" />
+      <workItem from="1585895518062" duration="5950000" />
+      <workItem from="1585902001426" duration="272000" />
+      <workItem from="1585902574044" duration="527000" />
+      <workItem from="1585903120199" duration="673000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585895729591">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680/-1600.-126.1280.920@0.0.1280.680" timestamp="1585895729591" />
+    <state x="395" y="143" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585891990007">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="395" y="143" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680/-1600.-126.1280.920@0.0.1280.680" timestamp="1585891990007" />
+    <state x="420" y="95" key="FileChooserDialogImpl" timestamp="1585903184252">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="420" y="95" key="FileChooserDialogImpl/0.0.1280.680/-1600.-126.1280.920@0.0.1280.680" timestamp="1585903184252" />
+    <state width="1237" height="166" key="GridCell.Tab.0.bottom" timestamp="1585903670533">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="166" key="GridCell.Tab.0.bottom/0.0.1280.680/-1600.-126.1280.920@0.0.1280.680" timestamp="1585903670533" />
+    <state width="1237" height="166" key="GridCell.Tab.0.center" timestamp="1585903670533">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="166" key="GridCell.Tab.0.center/0.0.1280.680/-1600.-126.1280.920@0.0.1280.680" timestamp="1585903670533" />
+    <state width="1237" height="166" key="GridCell.Tab.0.left" timestamp="1585903670533">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="166" key="GridCell.Tab.0.left/0.0.1280.680/-1600.-126.1280.920@0.0.1280.680" timestamp="1585903670533" />
+    <state width="1237" height="166" key="GridCell.Tab.0.right" timestamp="1585903670533">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="166" key="GridCell.Tab.0.right/0.0.1280.680/-1600.-126.1280.920@0.0.1280.680" timestamp="1585903670533" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1585903186959">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680/-1600.-126.1280.920@0.0.1280.680" timestamp="1585903186959" />
+    <state x="333" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1585903137704">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="333" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680/-1600.-126.1280.920@0.0.1280.680" timestamp="1585903137704" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bartender/src/modules/detector/Detector.py</url>
+          <line>37</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bartender/src/modules/detector/Detector.py</url>
+          <line>196</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bartender/src/modules/detector/Detector.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/3_api$Detector.coverage" NAME="Detector Coverage Results" MODIFIED="1585903670521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bartender/src/modules/detector" />
+    <SUITE FILE_PATH="coverage/3_api$WineModuleHandler.coverage" NAME="WineModuleHandler Coverage Results" MODIFIED="1585893698763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/prototype" />
+    <SUITE FILE_PATH="coverage/3_api$Classifier.coverage" NAME="Classifier Coverage Results" MODIFIED="1585895113807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bartender/src/modules/classifier" />
+  </component>
+</project>

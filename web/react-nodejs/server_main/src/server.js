@@ -9,11 +9,13 @@ const multer = require('multer');
 const moment = require('moment');
 const cors = require('cors')
 
+//const default_image = require('../images/default.png')
+
 
 // server settings...
 app.use(cors())
-app.listen(8000, function(){
-  console.log("app listening to port 8000")
+app.listen(11000, function(){
+  console.log("app listening to port 11000")
 });
 
 
@@ -36,7 +38,7 @@ var upload = multer({storage: image_storage}).single("selected_image");
 var transport = thrift.TBufferedTransport;
 var protocol = thrift.TBinaryProtocol;
 
-var connection = thrift.createConnection("localhost", 10101, {
+var connection = thrift.createConnection("localhost", 12000, {
     transport : transport,
     protocol : protocol
 });
@@ -70,22 +72,32 @@ app.post("/upload", (req, res, next) => {
       } else{
         console.log('ping()');
       }
-      client.test_function("test", async function(err, response) {
+      client.test_function_string("test_function_string", async function(err, response) {
         if (err){
           console.log("error : " + err)
         } else{
           console.log("string: " + response);
         }
+        client.test_function_maplist("test_function_maplist", function(err, response) {
+          if (err) {
+            console.log("error : " + err)
+          } else {
+            console.log('maplist - first wineobj: ' + response[0]['x'] + response[0]['y'] + response[0]['len_x'] + response[0]['len_y'] + response[0]['label']);
+          }
+        });
       });
     });
 
-    return res.json({success:1})
+    // call search_wines function. (test_function: test_function_maplist)
+    wines = client.test_function_maplist("test_function_maplist", function(err, response) {
+      if (err) {
+        console.log("error : " + err)
+      } else {
+        console.log('maplist - first wineobj: ' + response[0]['x'] + response[0]['y'] + response[0]['len_x'] + response[0]['len_y'] + response[0]['label']);
+      }
+      //return res.json({success:1, wines:response, default_image:default_image})
+      return res.json({success:1, wines:response})
+
+    });
   });
 });
-
-// image result
-app.get("/image_search", (req, res, next) => {
-  console.log("get call")
-  res.result="end"
-});
-
