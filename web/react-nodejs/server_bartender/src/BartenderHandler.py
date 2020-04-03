@@ -130,7 +130,7 @@ class BartenderHandler:
         src = cv2.imread("../image/"+filename, cv2.IMREAD_COLOR)
         objects = get_objects(src)
         
-        results=[]
+        wines=[]
         for object in objects:
             if object['label']==0:
                 continue
@@ -147,9 +147,11 @@ class BartenderHandler:
             label = get_label(vector)
             object['label']=label
             
-            results.append(object)
+            # get wine info
+            object['name']='default_name'
+            wines.append(object)
 
-        return results
+        return wines
 
 
 

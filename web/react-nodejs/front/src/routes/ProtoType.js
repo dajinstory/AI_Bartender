@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import Wine from "../components/Wine";
 import "./ProtoType.css";
+import {Link} from "react-router-dom";
 
 class ProtoType extends React.Component {
   constructor(props){
@@ -9,7 +10,8 @@ class ProtoType extends React.Component {
     this.state = {
       file: null,
       filename: null,
-      state: 'unuploaded',
+      fileURL: null,
+      result: null,
       wines: [],
     };
     // upload image
@@ -25,7 +27,7 @@ class ProtoType extends React.Component {
 
   // upload image to server
   onChange(e){
-    this.setState({file:e.target.files[0]})
+    this.setState({file:e.target.files[0], fileURL:URL.createObjectURL(e.target.files[0])})
   }
   onFormUpload = async(e) => {
     // prevent default action
@@ -45,7 +47,7 @@ class ProtoType extends React.Component {
         .then((response) => {
           //alert("Successfully uploaded\n" + String(JSON.stringify(response)));
           alert("Successfully uploaded\n");
-          this.setState({ state: "uploaded", filename: response['data']['filename']});
+          this.setState({ result: "uploaded", filename: response['data']['filename']});
         }).catch((error) => {
           alert("Fail to upload images\n" + error);
         }
@@ -62,7 +64,7 @@ class ProtoType extends React.Component {
     axios.get("http://localhost:11000/detect", {params: {filename: this.state.filename}})
         .then((response) => {
           alert("Successfully detected");
-          this.setState({ wines: response["data"]["wines"], state: "detected" });
+          this.setState({ wines: response["data"]["wines"], result: "detected" });
         }).catch((error) => {
           alert("Fail to detect wines\n" + error);
         }
@@ -78,7 +80,7 @@ class ProtoType extends React.Component {
     axios.get("http://localhost:11000/vectorize", {params: {filename: this.state.filename}})
         .then((response) => {
           alert("Successfully vectorized");
-          this.setState({ wines: response["data"]["wines"], state: "vectorized" });
+          this.setState({ wines: response["data"]["wines"], result: "vectorized" });
         }).catch((error) => {
           alert("Fail to vectorize wines\n" + error);
         }
@@ -94,7 +96,7 @@ class ProtoType extends React.Component {
     axios.get("http://localhost:11000/classify", {params: {filename: this.state.filename}})
         .then((response) => {
           alert("Successfully classified");
-          this.setState({ wines: response["data"]["wines"], state: "classified" });
+          this.setState({ wines: response["data"]["wines"], result: "classified" });
         }).catch((error) => {
           alert("Fail to classify wines\n" + error);
         }
@@ -103,7 +105,7 @@ class ProtoType extends React.Component {
 
   // rendering
   render() {
-    const { file, state, wines} = this.state;
+    const { file, filename, fileURL, result, wines} = this.state;
     return (
         <section className = "container">
           <div className="upload__container">
@@ -124,17 +126,16 @@ class ProtoType extends React.Component {
             <button onClick={this.onFormVectorize}>Vectorize</button>
             <button onClick={this.onFormClassify}>Classify</button>
           </div>
+          <img src={fileURL?(fileURL):('/images/default.png')}  width='30%' height='30%' max-width='600' max-height='600'  />
           <div className="result__container">
-            <div>result_image</div>
             <div className="wines">
               {wines.map(wine => (
                   <Wine
-                      key={wine.x}
-                      id={wine.x}
-                      year={wine.len_x}
-                      title={'name'}
-                      summary={'summary'}
-                      poster={null}
+                      id={wine.label ? (wine.id):("NO ID")}
+                      year={wine.year ? (wine.year):("NO YEAR")}
+                      title={wine.name ? (wine.name):("NO NAME")}
+                      summary={wine.summary ? (wine.summary):("NO DESCRIPTION")}
+                      poster={wine.poster ? (wine.poster):(null)}
                   />
               ))}
             </div>
