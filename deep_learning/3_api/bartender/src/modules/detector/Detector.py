@@ -26,7 +26,7 @@ class Detector:
 
         # variables for preprocessing input image
         self.resolution=(300, 300, 3)
-        self.grids=[1, 2, 4, 7]
+        self.grids=[1]
         self.margin_rate=0.3
         self.accuracy=0.5
         self.iou_threshold=0.5
