@@ -26,7 +26,7 @@ class Detector:
 
         # variables for preprocessing input image
         self.resolution=(300, 300, 3)
-        self.grids=[1,2]
+        self.grids=[1, 2, 4, 7]
         self.margin_rate=0.3
         self.accuracy=0.5
         self.iou_threshold=0.5
@@ -69,26 +69,27 @@ class Detector:
         # divide image by grid
         for grid in grids:
             # calculate len for each sliced image and stride to next image
-            len_x = int(img_w / (grid - margin_rate * (grid - 1)))
-            len_y = int(img_h / (grid - margin_rate * (grid - 1)))
-            stride_x = int(len_x * (1 - margin_rate))
-            stride_y = int(len_y * (1 - margin_rate))
+            len_r = int(img_h / (grid - margin_rate * (grid - 1)))
+            len_c = int(img_w / (grid - margin_rate * (grid - 1)))
+            stride_r = int(len_r * (1 - margin_rate))
+            stride_c = int(len_c * (1 - margin_rate))
 
             # slice image according to current grid
-            for idx_y in range(grid):
-                for idx_x in range(grid):
+            for idx_r in range(grid):
+                for idx_c in range(grid):
                     # get coord of current sliced image
-                    p_x = idx_x * stride_x
-                    p_y = idx_y * stride_y
+                    p_r = idx_r * stride_r
+                    p_c = idx_c * stride_c
+
                     new_coords.append({
-                        'x':p_x,
-                        'y':p_y,
-                        'len_x':len_x,
-                        'len_y':len_y
+                        'r':p_r,
+                        'c':p_c,
+                        'len_r':len_r,
+                        'len_c':len_c
                     })
 
                     # get current sliced image
-                    image_sliced = image[p_y:p_y + len_y, p_x:p_x + len_x:]
+                    image_sliced = image[p_r:p_r + len_r, p_c:p_c + len_c:]
                     image_sliced_resized = cv2.resize(image_sliced, self.resolution[:2])
                     new_images.append(image_sliced_resized)
 
@@ -107,10 +108,10 @@ class Detector:
         boxes = np.array(boxes)
 
         # coordinates of bounding boxes
-        start_xs = boxes[:, 1]
-        start_ys = boxes[:, 0]
-        end_xs = boxes[:, 3]
-        end_ys = boxes[:, 2]
+        start_rs = boxes[:, 0]
+        start_cs = boxes[:, 1]
+        end_rs = boxes[:, 2]
+        end_cs = boxes[:, 3]
 
         # Confidence scores of bounding boxes
         scores = np.array(scores)
@@ -124,7 +125,7 @@ class Detector:
         picked_labels = []
 
         # Compute areas of bounding boxes
-        areas = (end_xs - start_xs + 1) * (end_ys - start_ys + 1)
+        areas = (end_rs - start_rs + 1) * (end_cs - start_cs + 1)
 
         # Sort by confidence score of bounding boxes
         order = np.argsort(scores)
@@ -140,15 +141,15 @@ class Detector:
             picked_labels.append(labels[index])
 
             # Compute ordinates of intersection-over-union(IOU)
-            x1 = np.maximum(start_xs[index], start_xs[order[:-1]])
-            x2 = np.minimum(end_xs[index], end_xs[order[:-1]])
-            y1 = np.maximum(start_ys[index], start_ys[order[:-1]])
-            y2 = np.minimum(end_ys[index], end_ys[order[:-1]])
+            r1 = np.maximum(start_rs[index], start_rs[order[:-1]])
+            r2 = np.minimum(end_rs[index], end_rs[order[:-1]])
+            c1 = np.maximum(start_cs[index], start_cs[order[:-1]])
+            c2 = np.minimum(end_cs[index], end_cs[order[:-1]])
 
             # Compute areas of intersection-over-union
-            w = np.maximum(0.0, x2 - x1 + 1)
-            h = np.maximum(0.0, y2 - y1 + 1)
-            intersection = w * h
+            h = np.maximum(0.0, r2 - r1 + 1)
+            w = np.maximum(0.0, c2 - c1 + 1)
+            intersection = h * w
 
             # Compute the ratio between intersection and union
             ratio = intersection / (areas[index] + areas[order[:-1]] - intersection)
@@ -170,10 +171,10 @@ class Detector:
         for i, img in enumerate(results):
             det_label = results[i][:, 0]
             det_conf = results[i][:, 1]
-            det_xmin = results[i][:, 3]
-            det_ymin = results[i][:, 2]
-            det_xmax = results[i][:, 5]
-            det_ymax = results[i][:, 4]
+            det_xmin = results[i][:, 2]
+            det_ymin = results[i][:, 3]
+            det_xmax = results[i][:, 4]
+            det_ymax = results[i][:, 5]
 
             # Get detections with confidence higher than accuracy
             top_indices = [i for i, conf in enumerate(det_conf) if conf >= accuracy]
@@ -186,16 +187,16 @@ class Detector:
 
             # for each objects in current grid
             for j in range(top_conf.shape[0]):
-                xmin = int(round(top_xmin[j] * coords[i]['len_x']) + coords[i]['x'])
-                ymin = int(round(top_ymin[j] * coords[i]['len_y']) + coords[i]['y'])
-                xmax = int(round(top_xmax[j] * coords[i]['len_x']) + coords[i]['x'])
-                ymax = int(round(top_ymax[j] * coords[i]['len_y']) + coords[i]['y'])
+                rmin = int(round(top_ymin[j] * coords[i]['len_r']) + coords[i]['r'])
+                cmin = int(round(top_xmin[j] * coords[i]['len_c']) + coords[i]['c'])
+                rmax = int(round(top_ymax[j] * coords[i]['len_r']) + coords[i]['r'])
+                cmax = int(round(top_xmax[j] * coords[i]['len_c']) + coords[i]['c'])
 
                 score = top_conf[j]
                 label = int(top_label_indices[j])
                 label_name = self.classes[label - 1]
 
-                boxes.append([xmin, ymin, xmax, ymax])
+                boxes.append([rmin, cmin, rmax, cmax])
                 scores.append(score)
                 labels.append(label_name)
 
@@ -205,10 +206,10 @@ class Detector:
         objects = []
         for i in range(len(scores_nms)):
             objects.append({
-                'x':boxes_nms[i][0],
-                'y':boxes_nms[i][1],
-                'len_x':boxes_nms[i][2] - boxes_nms[i][0],
-                'len_y':boxes_nms[i][3] - boxes_nms[i][1],
+                'r':boxes_nms[i][0],
+                'c':boxes_nms[i][1],
+                'len_r':boxes_nms[i][2] - boxes_nms[i][0],
+                'len_c':boxes_nms[i][3] - boxes_nms[i][1],
                 'label':labels_nms[i]
             })
         return objects
@@ -225,6 +226,10 @@ class Detector:
         preds = self.detector.predict(divided_images, batch_size, verbose)
         results = self.bbox_util.detection_out(preds) # 0.0-1.0 position in each grid cell
 
+        ###############
+        ## IMPORTANT ##
+        ###############
+        # only SSD module use (x,y) - camera coords. others use (r,c) - matrix coords
         # nms objects form each slice images, and then get the real coords in input image
         return self.transform_detection_result(results, coords)
 
