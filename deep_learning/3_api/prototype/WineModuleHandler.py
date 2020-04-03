@@ -12,9 +12,8 @@ import os
 import struct
 
 import sys
-from ssd_keras import ssd
 from ssd import SSD300
-from ssd_keras import ssd_utils 
+from prototype.ssd_keras import ssd_utils, ssd
 from ssd_utils import BBoxUtility
 
 

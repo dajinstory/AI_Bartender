@@ -181,7 +181,7 @@ def single_shot_multibox_detector(image, accuracy=0.5,iou_threshold=0.5):
     return selected_boxes,selected_scores,selected_labels
 
 
-path = './pics/1.jpg'
+path = 'pics/1.jpg'
 img = cv2.imread(path,cv2.IMREAD_COLOR)
 images = np.array([img])
 selected_boxes,selected_scores,selected_labels=single_shot_multibox_detector(images)
