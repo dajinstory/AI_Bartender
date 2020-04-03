@@ -80,7 +80,7 @@ class ProtoType extends React.Component {
     axios.get("http://localhost:11000/vectorize", {params: {filename: this.state.filename}})
         .then((response) => {
           alert("Successfully vectorized");
-          this.setState({ wines: response["data"]["wines"], result: "vectorized" });
+          this.setState({ wines: json.loads(response["data"]["wines"]), result: "vectorized" });
         }).catch((error) => {
           alert("Fail to vectorize wines\n" + error);
         }
@@ -131,9 +131,9 @@ class ProtoType extends React.Component {
             <div className="wines">
               {wines.map(wine => (
                   <Wine
-                      id={wine.label ? (wine.id):(4112)}
-                      year={wine.year ? (wine.year):(4112)}
-                      title={wine.name ? (wine.name):(wine.r + wine.c + wine.)}
+                      id={wine.label ? (wine.id):(wine.label)}
+                      year={wine.year ? (wine.year):(wine.r)}
+                      title={wine.name ? (wine.name):("NO TITLE")}
                       summary={wine.summary ? (wine.summary):("NO DESCRIPTION")}
                       poster={wine.poster ? (wine.poster):(null)}
                   />

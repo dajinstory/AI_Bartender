@@ -3,7 +3,7 @@ import sys
 import time
 import cv2
 
-sys.path.insert(0, glob.glob('C:\\Users\\DajinHan\\Anaconda3\\envs\\ai_bartender\\Lib\\*')[0])
+#sys.path.insert(0, glob.glob('C:\\Users\\DajinHan\\Anaconda3\\envs\\ai_bartender\\Lib\\*')[0])
 
 
 # thrift modules
@@ -81,7 +81,8 @@ class BartenderHandler:
         objects = self.get_objects(src)
         
         # convert data to string format
-        return objects
+        json_objects = JSON.stringify(objects)
+        return json_objects
 
     def proto_get_vectors(self, filename):
         # load image
