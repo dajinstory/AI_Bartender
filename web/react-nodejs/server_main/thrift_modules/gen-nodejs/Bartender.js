@@ -73,7 +73,7 @@ var Bartender_get_wines_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined && args.success !== null) {
-      this.success = Thrift.copyList(args.success, [Thrift.copyMap, null]);
+      this.success = args.success;
     }
   }
 };
@@ -89,26 +89,8 @@ Bartender_get_wines_result.prototype.read = function(input) {
     }
     switch (fid) {
       case 0:
-      if (ftype == Thrift.Type.LIST) {
-        this.success = [];
-        var _rtmp31 = input.readListBegin();
-        var _size0 = _rtmp31.size || 0;
-        for (var _i2 = 0; _i2 < _size0; ++_i2) {
-          var elem3 = null;
-          elem3 = {};
-          var _rtmp35 = input.readMapBegin();
-          var _size4 = _rtmp35.size || 0;
-          for (var _i6 = 0; _i6 < _size4; ++_i6) {
-            var key7 = null;
-            var val8 = null;
-            key7 = input.readString();
-            val8 = input.readString();
-            elem3[key7] = val8;
-          }
-          input.readMapEnd();
-          this.success.push(elem3);
-        }
-        input.readListEnd();
+      if (ftype == Thrift.Type.STRING) {
+        this.success = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -128,23 +110,8 @@ Bartender_get_wines_result.prototype.read = function(input) {
 Bartender_get_wines_result.prototype.write = function(output) {
   output.writeStructBegin('Bartender_get_wines_result');
   if (this.success !== null && this.success !== undefined) {
-    output.writeFieldBegin('success', Thrift.Type.LIST, 0);
-    output.writeListBegin(Thrift.Type.MAP, this.success.length);
-    for (var iter9 in this.success) {
-      if (this.success.hasOwnProperty(iter9)) {
-        iter9 = this.success[iter9];
-        output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(iter9));
-        for (var kiter10 in iter9) {
-          if (iter9.hasOwnProperty(kiter10)) {
-            var viter11 = iter9[kiter10];
-            output.writeString(kiter10);
-            output.writeString(viter11);
-          }
-        }
-        output.writeMapEnd();
-      }
-    }
-    output.writeListEnd();
+    output.writeFieldBegin('success', Thrift.Type.STRING, 0);
+    output.writeString(this.success);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -206,7 +173,7 @@ var Bartender_proto_get_objects_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined && args.success !== null) {
-      this.success = Thrift.copyList(args.success, [Thrift.copyMap, null]);
+      this.success = args.success;
     }
   }
 };
@@ -222,26 +189,8 @@ Bartender_proto_get_objects_result.prototype.read = function(input) {
     }
     switch (fid) {
       case 0:
-      if (ftype == Thrift.Type.LIST) {
-        this.success = [];
-        var _rtmp313 = input.readListBegin();
-        var _size12 = _rtmp313.size || 0;
-        for (var _i14 = 0; _i14 < _size12; ++_i14) {
-          var elem15 = null;
-          elem15 = {};
-          var _rtmp317 = input.readMapBegin();
-          var _size16 = _rtmp317.size || 0;
-          for (var _i18 = 0; _i18 < _size16; ++_i18) {
-            var key19 = null;
-            var val20 = null;
-            key19 = input.readString();
-            val20 = input.readString();
-            elem15[key19] = val20;
-          }
-          input.readMapEnd();
-          this.success.push(elem15);
-        }
-        input.readListEnd();
+      if (ftype == Thrift.Type.STRING) {
+        this.success = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -261,23 +210,8 @@ Bartender_proto_get_objects_result.prototype.read = function(input) {
 Bartender_proto_get_objects_result.prototype.write = function(output) {
   output.writeStructBegin('Bartender_proto_get_objects_result');
   if (this.success !== null && this.success !== undefined) {
-    output.writeFieldBegin('success', Thrift.Type.LIST, 0);
-    output.writeListBegin(Thrift.Type.MAP, this.success.length);
-    for (var iter21 in this.success) {
-      if (this.success.hasOwnProperty(iter21)) {
-        iter21 = this.success[iter21];
-        output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(iter21));
-        for (var kiter22 in iter21) {
-          if (iter21.hasOwnProperty(kiter22)) {
-            var viter23 = iter21[kiter22];
-            output.writeString(kiter22);
-            output.writeString(viter23);
-          }
-        }
-        output.writeMapEnd();
-      }
-    }
-    output.writeListEnd();
+    output.writeFieldBegin('success', Thrift.Type.STRING, 0);
+    output.writeString(this.success);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -339,7 +273,7 @@ var Bartender_proto_get_vectors_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined && args.success !== null) {
-      this.success = Thrift.copyList(args.success, [Thrift.copyMap, null]);
+      this.success = args.success;
     }
   }
 };
@@ -355,26 +289,8 @@ Bartender_proto_get_vectors_result.prototype.read = function(input) {
     }
     switch (fid) {
       case 0:
-      if (ftype == Thrift.Type.LIST) {
-        this.success = [];
-        var _rtmp325 = input.readListBegin();
-        var _size24 = _rtmp325.size || 0;
-        for (var _i26 = 0; _i26 < _size24; ++_i26) {
-          var elem27 = null;
-          elem27 = {};
-          var _rtmp329 = input.readMapBegin();
-          var _size28 = _rtmp329.size || 0;
-          for (var _i30 = 0; _i30 < _size28; ++_i30) {
-            var key31 = null;
-            var val32 = null;
-            key31 = input.readString();
-            val32 = input.readString();
-            elem27[key31] = val32;
-          }
-          input.readMapEnd();
-          this.success.push(elem27);
-        }
-        input.readListEnd();
+      if (ftype == Thrift.Type.STRING) {
+        this.success = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -394,23 +310,8 @@ Bartender_proto_get_vectors_result.prototype.read = function(input) {
 Bartender_proto_get_vectors_result.prototype.write = function(output) {
   output.writeStructBegin('Bartender_proto_get_vectors_result');
   if (this.success !== null && this.success !== undefined) {
-    output.writeFieldBegin('success', Thrift.Type.LIST, 0);
-    output.writeListBegin(Thrift.Type.MAP, this.success.length);
-    for (var iter33 in this.success) {
-      if (this.success.hasOwnProperty(iter33)) {
-        iter33 = this.success[iter33];
-        output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(iter33));
-        for (var kiter34 in iter33) {
-          if (iter33.hasOwnProperty(kiter34)) {
-            var viter35 = iter33[kiter34];
-            output.writeString(kiter34);
-            output.writeString(viter35);
-          }
-        }
-        output.writeMapEnd();
-      }
-    }
-    output.writeListEnd();
+    output.writeFieldBegin('success', Thrift.Type.STRING, 0);
+    output.writeString(this.success);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -472,7 +373,7 @@ var Bartender_proto_get_labels_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined && args.success !== null) {
-      this.success = Thrift.copyList(args.success, [Thrift.copyMap, null]);
+      this.success = args.success;
     }
   }
 };
@@ -488,26 +389,8 @@ Bartender_proto_get_labels_result.prototype.read = function(input) {
     }
     switch (fid) {
       case 0:
-      if (ftype == Thrift.Type.LIST) {
-        this.success = [];
-        var _rtmp337 = input.readListBegin();
-        var _size36 = _rtmp337.size || 0;
-        for (var _i38 = 0; _i38 < _size36; ++_i38) {
-          var elem39 = null;
-          elem39 = {};
-          var _rtmp341 = input.readMapBegin();
-          var _size40 = _rtmp341.size || 0;
-          for (var _i42 = 0; _i42 < _size40; ++_i42) {
-            var key43 = null;
-            var val44 = null;
-            key43 = input.readString();
-            val44 = input.readString();
-            elem39[key43] = val44;
-          }
-          input.readMapEnd();
-          this.success.push(elem39);
-        }
-        input.readListEnd();
+      if (ftype == Thrift.Type.STRING) {
+        this.success = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -527,23 +410,8 @@ Bartender_proto_get_labels_result.prototype.read = function(input) {
 Bartender_proto_get_labels_result.prototype.write = function(output) {
   output.writeStructBegin('Bartender_proto_get_labels_result');
   if (this.success !== null && this.success !== undefined) {
-    output.writeFieldBegin('success', Thrift.Type.LIST, 0);
-    output.writeListBegin(Thrift.Type.MAP, this.success.length);
-    for (var iter45 in this.success) {
-      if (this.success.hasOwnProperty(iter45)) {
-        iter45 = this.success[iter45];
-        output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(iter45));
-        for (var kiter46 in iter45) {
-          if (iter45.hasOwnProperty(kiter46)) {
-            var viter47 = iter45[kiter46];
-            output.writeString(kiter46);
-            output.writeString(viter47);
-          }
-        }
-        output.writeMapEnd();
-      }
-    }
-    output.writeListEnd();
+    output.writeFieldBegin('success', Thrift.Type.STRING, 0);
+    output.writeString(this.success);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -723,22 +591,22 @@ Bartender_test_function_maplist_result.prototype.read = function(input) {
       case 0:
       if (ftype == Thrift.Type.LIST) {
         this.success = [];
-        var _rtmp349 = input.readListBegin();
-        var _size48 = _rtmp349.size || 0;
-        for (var _i50 = 0; _i50 < _size48; ++_i50) {
-          var elem51 = null;
-          elem51 = {};
-          var _rtmp353 = input.readMapBegin();
-          var _size52 = _rtmp353.size || 0;
-          for (var _i54 = 0; _i54 < _size52; ++_i54) {
-            var key55 = null;
-            var val56 = null;
-            key55 = input.readString();
-            val56 = input.readString();
-            elem51[key55] = val56;
+        var _rtmp31 = input.readListBegin();
+        var _size0 = _rtmp31.size || 0;
+        for (var _i2 = 0; _i2 < _size0; ++_i2) {
+          var elem3 = null;
+          elem3 = {};
+          var _rtmp35 = input.readMapBegin();
+          var _size4 = _rtmp35.size || 0;
+          for (var _i6 = 0; _i6 < _size4; ++_i6) {
+            var key7 = null;
+            var val8 = null;
+            key7 = input.readString();
+            val8 = input.readString();
+            elem3[key7] = val8;
           }
           input.readMapEnd();
-          this.success.push(elem51);
+          this.success.push(elem3);
         }
         input.readListEnd();
       } else {
@@ -762,15 +630,15 @@ Bartender_test_function_maplist_result.prototype.write = function(output) {
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.LIST, 0);
     output.writeListBegin(Thrift.Type.MAP, this.success.length);
-    for (var iter57 in this.success) {
-      if (this.success.hasOwnProperty(iter57)) {
-        iter57 = this.success[iter57];
-        output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(iter57));
-        for (var kiter58 in iter57) {
-          if (iter57.hasOwnProperty(kiter58)) {
-            var viter59 = iter57[kiter58];
-            output.writeString(kiter58);
-            output.writeString(viter59);
+    for (var iter9 in this.success) {
+      if (this.success.hasOwnProperty(iter9)) {
+        iter9 = this.success[iter9];
+        output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(iter9));
+        for (var kiter10 in iter9) {
+          if (iter9.hasOwnProperty(kiter10)) {
+            var viter11 = iter9[kiter10];
+            output.writeString(kiter10);
+            output.writeString(viter11);
           }
         }
         output.writeMapEnd();
