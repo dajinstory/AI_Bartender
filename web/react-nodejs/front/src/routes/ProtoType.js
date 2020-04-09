@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import Wine from "../components/Wine";
+import Object from "../components/Object";
 import "./ProtoType.css";
 import {Link} from "react-router-dom";
 
@@ -64,7 +65,7 @@ class ProtoType extends React.Component {
     axios.get("http://localhost:11000/detect", {params: {filename: this.state.filename}})
         .then((response) => {
           alert("Successfully detected");
-          this.setState({ wines: response["data"]["wines"], result: "detected" });
+          this.setState({ wines: JSON.parse(response["data"]["wines"]), result: "detected" });
         }).catch((error) => {
           alert("Fail to detect wines\n" + error);
         }
@@ -128,17 +129,34 @@ class ProtoType extends React.Component {
           </div>
           <img src={fileURL?(fileURL):('/images/default.png')}  width='30%' height='30%' max-width='600' max-height='600'  />
           <div className="result__container">
-            <div className="wines">
-              {wines.map(wine => (
-                  <Wine
-                      id={wine.label ? (wine.id):("NO ID")}
-                      year={wine.year ? (wine.year):("NO YEAR")}
-                      title={wine.name ? (wine.name):("NO NAME")}
-                      summary={wine.summary ? (wine.summary):("NO DESCRIPTION")}
-                      poster={wine.poster ? (wine.poster):(null)}
-                  />
-              ))}
-            </div>
+            {
+              result=='classified ' ?(
+                  <div className="wines">
+                    {wines.map(wine => (
+                        <Wine
+                            id={wine.label ? (wine.label):(9999)}
+                            year={wine.year ? (wine.year):(9999)}
+                            title={wine.name ? (wine.name):("NO TITLE")}
+                            summary={wine.summary ? (wine.summary):("NO DESCRIPTION")}
+                            poster={wine.poster ? (wine.poster):(null)}
+                        />
+                    ))}
+                  </div>
+              ) : (
+                  <div className="objects">
+                    {wines.map(wine => (
+                        <Object
+                            r={wine.r ? (wine.r):(9999)}
+                            c={wine.c ? (wine.c):(9999)}
+                            len_r={wine.len_r ? (wine.len_r):(9999)}
+                            len_c={wine.len_c ? (wine.len_c):(9999)}
+                            poster={wine.poster ? (wine.poster):(null)}
+                        />
+                    ))}
+                  </div>
+              )
+            }
+
           </div>
         </section>
     )

@@ -21,12 +21,12 @@ exception InvalidOperation {
 service Bartender extends shared.SharedService {
 
   // main api
-  list<map<string,string>> get_wines(1:string filename),
+  string get_wines(1:string filename),
 
   // prototype api
-  list<map<string,string>> proto_get_objects(1:string filename),
-  list<map<string,string>> proto_get_vectors(1:string filename),
-  list<map<string,string>> proto_get_labels(1:string filename),
+  string proto_get_objects(1:string filename),
+  string proto_get_vectors(1:string filename),
+  string proto_get_labels(1:string filename),
 
 
   // functions to check thrift connection

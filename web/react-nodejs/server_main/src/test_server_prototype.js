@@ -82,11 +82,11 @@ app.post("/upload", (req, res, next) => {
 app.get("/detect", (req, res) => {
   console.log("filename: " + req.query.filename)
   // call proto_get_objects
-  client.test_function_maplist(req.query.filename, function(err, response) {
+  client.proto_get_objects("../../server_main/images/"+req.query.filename, function(err, response) {
     if (err) {
       console.log("error : " + err)
     } else {
-      console.log('maplist - first wine obj: ' + response[0]['x'] + response[0]['y'] + response[0]['len_x'] + response[0]['len_y'] + response[0]['label']);
+      console.log('objects: ' + response);
     }
     return res.json({success:1, wines:response})
   });
