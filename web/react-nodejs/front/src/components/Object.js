@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./Object.css";
 
-function Wine({ r, c, len_r, len_c, poster }) {
+function Object({ r, c, len_r, len_c, poster }) {
   return (
-      <div className="wine">
-          <img src={poster?(poster):('/images/default.png')} />
-          <div className="wine__data">
+      <div className="object">
+          <img src={poster ? (poster):('/images/default.png')} />
+          <div className="object__data">
             <h5>{r}</h5>
             <h5>{c}</h5>
             <h5>{len_r}</h5>
@@ -17,12 +17,12 @@ function Wine({ r, c, len_r, len_c, poster }) {
   );
 }
 
-Wine.propTypes = {
-  id: PropTypes.number.isRequired,
-  year: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  summary: PropTypes.string.isRequired,
+Object.propTypes = {
+  r: PropTypes.number.isRequired,
+  c: PropTypes.number.isRequired,
+  len_r: PropTypes.number.isRequired,
+  len_c: PropTypes.number.isRequired,
   poster: PropTypes.string.isRequired
 };
 
-export default Wine;
+export default Object;
