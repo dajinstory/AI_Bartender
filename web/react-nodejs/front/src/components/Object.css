@@ -1,4 +1,4 @@
-.wines .wine {
+.objects .object {
   width: 45%;
   background-color: white;
   margin-bottom: 70px;
@@ -10,7 +10,7 @@
     0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
 }
 
-.wines .wine a {
+.objects .object a {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -18,7 +18,7 @@
   color: inherit;
 }
 
-.wine img {
+.object img {
   position: relative;
   top: -50px;
   max-width: 150px;
@@ -28,19 +28,19 @@
     0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
 }
 
-.wine .wine__title,
-.wine .wine__year {
+.object .object__title,
+.object .object__year {
   margin: 0;
   font-weight: 300;
 }
 
-.wine .wine__title {
+.object .object__title {
   margin-bottom: 5px;
   font-size: 24px;
   color: #2c2c2c;
 }
 
-.wine .wine__year {
+.object .object__year {
   margin-right: 10px;
   font-size: 14px;
 }

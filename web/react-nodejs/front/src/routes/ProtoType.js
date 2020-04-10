@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
-import Wine from "../components/Wine";
 import Object from "../components/Object";
+import Wine from "../components/Wine";
 import "./ProtoType.css";
 import {Link} from "react-router-dom";
 
@@ -13,7 +13,7 @@ class ProtoType extends React.Component {
       filename: null,
       fileURL: null,
       result: null,
-      wines: [],
+      objects: [],
     };
     // upload image
     this.onChange = this.onChange.bind(this);
@@ -47,8 +47,8 @@ class ProtoType extends React.Component {
     axios.post("http://localhost:11000/upload", formData, config)
         .then((response) => {
           //alert("Successfully uploaded\n" + String(JSON.stringify(response)));
-          alert("Successfully uploaded\n");
           this.setState({ result: "uploaded", filename: response['data']['filename']});
+          alert("Successfully uploaded\n" + String(this.state.fileURL));
         }).catch((error) => {
           alert("Fail to upload images\n" + error);
         }
@@ -56,23 +56,24 @@ class ProtoType extends React.Component {
   }
 
 
-  // detect wines in uploaded image
+  // detect objects in uploaded image
   onFormDetect = async(e) => {
     // prevent default action
     e.preventDefault();
 
-    // get - detect wines
+    // get - detect objects
     axios.get("http://localhost:11000/detect", {params: {filename: this.state.filename}})
         .then((response) => {
           alert("Successfully detected");
-          this.setState({ wines: JSON.parse(response["data"]["wines"]), result: "detected" });
+          this.setState({ objects:response["data"]["objects"], result: "detected" });
         }).catch((error) => {
-          alert("Fail to detect wines\n" + error);
+          alert("Fail to detect objects\n" + error);
         }
     );
   }
 
-  // vectorize wines in uploaded image
+
+  // vectorize objects in uploaded image
   onFormVectorize = async(e) => {
     // prevent default action
     e.preventDefault();
@@ -81,37 +82,37 @@ class ProtoType extends React.Component {
     axios.get("http://localhost:11000/vectorize", {params: {filename: this.state.filename}})
         .then((response) => {
           alert("Successfully vectorized");
-          this.setState({ wines: response["data"]["wines"], result: "vectorized" });
+          this.setState({ objects: response["data"]["objects"], result: "vectorized" });
         }).catch((error) => {
-          alert("Fail to vectorize wines\n" + error);
+          alert("Fail to vectorize objects\n" + error);
         }
     );
   }
 
-  // classify wines
+  // classify objects
   onFormClassify = async(e) => {
     // prevent default action
     e.preventDefault();
 
-    // get - classify wines
+    // get - classify objects
     axios.get("http://localhost:11000/classify", {params: {filename: this.state.filename}})
         .then((response) => {
           alert("Successfully classified");
-          this.setState({ wines: response["data"]["wines"], result: "classified" });
+          this.setState({ objects: response["data"]["objects"], result: "classified" });
         }).catch((error) => {
-          alert("Fail to classify wines\n" + error);
+          alert("Fail to classify objects\n" + error);
         }
     );
   }
 
   // rendering
   render() {
-    const { file, filename, fileURL, result, wines} = this.state;
+    const { file, filename, fileURL, result, objects} = this.state;
     return (
         <section className = "container">
           <div className="upload__container">
             <form onSubmit={this.onFormUpload}>
-              <h3> Search Wines</h3>
+              <h3> Search objects</h3>
               {
                 file ?(
                     <div>selected_image</div>
@@ -132,8 +133,8 @@ class ProtoType extends React.Component {
             {
               result=='classified ' ?(
                   <div className="wines">
-                    {wines.map(wine => (
-                        <Wine
+                    {objects.map(wine => (
+                        <wine
                             id={wine.label ? (wine.label):(9999)}
                             year={wine.year ? (wine.year):(9999)}
                             title={wine.name ? (wine.name):("NO TITLE")}
@@ -144,13 +145,13 @@ class ProtoType extends React.Component {
                   </div>
               ) : (
                   <div className="objects">
-                    {wines.map(wine => (
+                    {objects.map(object => (
                         <Object
-                            r={wine.r ? (wine.r):(9999)}
-                            c={wine.c ? (wine.c):(9999)}
-                            len_r={wine.len_r ? (wine.len_r):(9999)}
-                            len_c={wine.len_c ? (wine.len_c):(9999)}
-                            poster={wine.poster ? (wine.poster):(null)}
+                            r={object.r ? (object.r):(9999)}
+                            c={object.c ? (object.c):(9999)}
+                            len_r={object.len_r ? (object.len_r):(9999)}
+                            len_c={object.len_c ? (object.len_c):(9999)}
+                            poster={object.URL ? (object.URL):(null)}
                         />
                     ))}
                   </div>
