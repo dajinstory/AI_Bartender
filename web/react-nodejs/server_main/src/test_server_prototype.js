@@ -77,7 +77,8 @@ app.post("/upload", (req, res, next) => {
   });
 });
 
-// get images
+
+// open static file access to get images
 app.use('/static', express.static(__dirname + '/../public'));
 
 
@@ -85,7 +86,7 @@ app.use('/static', express.static(__dirname + '/../public'));
 app.get("/detect", (req, res) => {
   console.log("filename: " + req.query.filename)
   // call proto_get_objects
-  client.proto_get_objects("../../server_main/public/images/"+req.query.filename, function(err, response) {
+  client.proto_get_objects(req.query.filename, function(err, response) {
     if (err) {
       console.log("error : " + err);
     } else {
@@ -111,7 +112,6 @@ app.get("/detect", (req, res) => {
       sharp(image_path+req.query.filename).extract({left:c, top:r, width:len_c, height:len_r})
           .toFile(image_path+cropped_image_path+cropped_filename);
       objects[idx]['URL'] =  'http://localhost:11000/static/images/'+cropped_image_path+cropped_filename;
-      objects[idx]['filename'] =  cropped_image_path+cropped_filename;
     }
 
     return res.json({success:1, objects:objects})

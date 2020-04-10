@@ -6,13 +6,25 @@ import "./Object.css";
 function Object({ r, c, len_r, len_c, poster }) {
   return (
       <div className="object">
+        <Link
+            to={{
+              pathname: `/object/${String(r)+'_'+String(c)}`,
+              state: {
+                r,
+                c,
+                len_r,
+                len_c,
+                poster
+              }
+            }}
+        >
           <img src={poster ? (poster):('/images/default.png')} />
           <div className="object__data">
-            <h5>{r}</h5>
-            <h5>{c}</h5>
-            <h5>{len_r}</h5>
-            <h5>{len_c}</h5>
+            <h3 className="object__name">UNKNOWN</h3>
+            <h5 className="object__position">{r}, {c}, {len_r}, {len_c}</h5>
+            <p className="object__summary">...</p>
           </div>
+        </Link>
       </div>
   );
 }

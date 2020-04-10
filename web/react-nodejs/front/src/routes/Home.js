@@ -12,7 +12,6 @@ class Home extends React.Component {
     const tmp = await axios.get(
         "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
     );
-    alert(JSON.stringify(tmp))
     const {
       data: {
         data: { movies }

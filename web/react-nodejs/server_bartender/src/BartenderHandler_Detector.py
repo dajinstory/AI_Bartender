@@ -4,6 +4,12 @@ import time
 import cv2
 import json
 
+# load image with url type
+import requests
+import numpy as np
+from PIL import Image
+from io import BytesIO
+
 #sys.path.insert(0, glob.glob('C:\\Users\\DajinHan\\Anaconda3\\envs\\ai_bartender\\Lib\\*')[0])
 
 
@@ -31,7 +37,7 @@ class BartenderHandler:
         self.vectorizer = 'vectorizer'
         self.classifier = 'classifier'
         self.database = 'database'
-
+        self.main_server = 'http://localhost:11000/'
 
 
     # internal functions
@@ -78,7 +84,9 @@ class BartenderHandler:
     # thrift api
     def proto_get_objects(self, filename):
         # load image
-        src = cv2.imread(filename, cv2.IMREAD_COLOR)
+        response = requests.get(self.main_server+'static/images/'+filename)
+        src = np.array(Image.open(BytesIO(response.content)))
+        #src = cv2.imread(filename, cv2.IMREAD_COLOR)
         objects = self.get_objects(src)
 
         # convert data to string format
@@ -90,7 +98,9 @@ class BartenderHandler:
 
     def proto_get_vectors(self, filename):
         # load image
-        src = cv2.imread(filename, cv2.IMREAD_COLOR)
+        response = requests.get(self.main_server+'static/images/'+filename)
+        src = np.array(Image.open(BytesIO(response.content)))
+        #src = cv2.imread(filename, cv2.IMREAD_COLOR)
         objects = self.get_objects(src)
 
         results = []
@@ -112,7 +122,9 @@ class BartenderHandler:
 
     def proto_get_labels(self, filename):
         # load image
-        src = cv2.imread(filename, cv2.IMREAD_COLOR)
+        response = requests.get(self.main_server+'static/images/'+filename)
+        src = np.array(Image.open(BytesIO(response.content)))
+        #src = cv2.imread(filename, cv2.IMREAD_COLOR)
         objects = self.get_objects(src)
 
         results = []

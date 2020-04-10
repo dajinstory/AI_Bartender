@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios';
 import Object from "../components/Object";
-import Wine from "../components/Wine";
 import "./ProtoType.css";
 import {Link} from "react-router-dom";
 
@@ -48,7 +47,7 @@ class ProtoType extends React.Component {
         .then((response) => {
           //alert("Successfully uploaded\n" + String(JSON.stringify(response)));
           this.setState({ result: "uploaded", filename: response['data']['filename']});
-          alert("Successfully uploaded\n" + String(this.state.fileURL));
+          alert("Successfully uploaded\n");
         }).catch((error) => {
           alert("Fail to upload images\n" + error);
         }
@@ -128,37 +127,36 @@ class ProtoType extends React.Component {
             <button onClick={this.onFormVectorize}>Vectorize</button>
             <button onClick={this.onFormClassify}>Classify</button>
           </div>
-          <img src={fileURL?(fileURL):('/images/default.png')}  width='30%' height='30%' max-width='600' max-height='600'  />
-          <div className="result__container">
-            {
-              result=='classified ' ?(
-                  <div className="wines">
-                    {objects.map(wine => (
-                        <wine
-                            id={wine.label ? (wine.label):(9999)}
-                            year={wine.year ? (wine.year):(9999)}
-                            title={wine.name ? (wine.name):("NO TITLE")}
-                            summary={wine.summary ? (wine.summary):("NO DESCRIPTION")}
-                            poster={wine.poster ? (wine.poster):(null)}
-                        />
-                    ))}
-                  </div>
-              ) : (
-                  <div className="objects">
-                    {objects.map(object => (
-                        <Object
-                            r={object.r ? (object.r):(9999)}
-                            c={object.c ? (object.c):(9999)}
-                            len_r={object.len_r ? (object.len_r):(9999)}
-                            len_c={object.len_c ? (object.len_c):(9999)}
-                            poster={object.URL ? (object.URL):(null)}
-                        />
-                    ))}
-                  </div>
-              )
-            }
 
-          </div>
+          <img src={fileURL?(fileURL):('/images/default.png')}  width='30%' height='30%' max-width='600' max-height='600'  />
+
+          {
+            result=='classified ' ?(
+                <div className="objects">
+                  {objects.map(object => (
+                      <Object
+                          r={object.r ? (object.r):(9999)}
+                          c={object.c ? (object.c):(9999)}
+                          len_r={object.len_r ? (object.len_r):(9999)}
+                          len_c={object.len_c ? (object.len_c):(9999)}
+                          poster={object.URL ? (object.URL):(null)}
+                      />
+                  ))}
+                </div>
+            ) : (
+                <div className="objects">
+                  {objects.map(object => (
+                      <Object
+                          r={object.r ? (object.r):(9999)}
+                          c={object.c ? (object.c):(9999)}
+                          len_r={object.len_r ? (object.len_r):(9999)}
+                          len_c={object.len_c ? (object.len_c):(9999)}
+                          poster={object.URL ? (object.URL):(null)}
+                      />
+                  ))}
+                </div>
+            )
+          }
         </section>
     )
   }
