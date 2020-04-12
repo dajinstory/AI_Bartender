@@ -151,6 +151,8 @@ class ProtoType extends React.Component {
                           c={object.c ? (object.c):(9999)}
                           len_r={object.len_r ? (object.len_r):(9999)}
                           len_c={object.len_c ? (object.len_c):(9999)}
+                          vector={object.vector ? (object.vector):([9999,9999,9999,9999])}
+                          label={object.label ? (object.label):(9999)}
                           poster={object.URL ? (object.URL):(null)}
                       />
                   ))}

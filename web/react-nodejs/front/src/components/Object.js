@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./Object.css";
 
-function Object({ r, c, len_r, len_c, poster }) {
+function Object({ r, c, len_r, len_c, vector, label, poster }) {
   return (
       <div className="object">
         <Link
@@ -14,6 +14,8 @@ function Object({ r, c, len_r, len_c, poster }) {
                 c,
                 len_r,
                 len_c,
+                vector,
+                label,
                 poster
               }
             }}
@@ -22,7 +24,7 @@ function Object({ r, c, len_r, len_c, poster }) {
           <div className="object__data">
             <h3 className="object__name">UNKNOWN</h3>
             <h5 className="object__position">{r}, {c}, {len_r}, {len_c}</h5>
-            <p className="object__summary">...</p>
+            <p className="object__summary">{vector}, {label}</p>
           </div>
         </Link>
       </div>

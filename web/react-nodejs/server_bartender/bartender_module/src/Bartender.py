@@ -70,10 +70,10 @@ class Bartender:
 
             # get roi portion of image and resize it
             roi = src[object['r']:object['r'] + object['len_r'], object['c']:object['c'] + object['len_c']]
-            dst = cv2.resize(roi, dsize=('triplet_input_r','triplet_input_c'), interpolation=cv2.INTER_AREA)
+            # dst = cv2.resize(roi, dsize=('triplet_input_r','triplet_input_c'), interpolation=cv2.INTER_AREA)
 
             # get vector
-            vector = self.get_vector(dst)
+            vector = self.get_vector(roi)
             object['vector'] = self.vector2string(vector)
 
             results.append(object)

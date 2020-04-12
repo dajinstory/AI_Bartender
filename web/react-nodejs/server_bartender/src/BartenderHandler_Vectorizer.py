@@ -60,10 +60,6 @@ class BartenderHandler:
         wine = self.database.get_wine(label)
         return wine
 
-    def vector2string(self, vector):
-        vector_str = "asdf"
-        return vector_str
-
 
 
     # functions to check thrift connection
@@ -95,6 +91,7 @@ class BartenderHandler:
         # convert data to string format
         for object in objects:
             for key in object.keys():
+                # avoid the problem with np.int32 is not serializable
                 object[key]=object[key].item()
         json_objects = json.dumps(objects)
         return json_objects
@@ -106,11 +103,7 @@ class BartenderHandler:
         #src = cv2.imread(filename, cv2.IMREAD_COLOR)
         objects = self.get_objects(src)
 
-        results = []
         for object in objects:
-            if object['label'] != 'Bottle':
-                continue
-
             # get roi portion of image and resize it
             roi = src[object['r']:object['r'] + object['len_r'], object['c']:object['c'] + object['len_c']]
             dst = cv2.resize(roi, dsize=(28,28), interpolation=cv2.INTER_AREA)
@@ -118,11 +111,18 @@ class BartenderHandler:
 
             # get vector
             vector = self.get_vector(dst_gray)
-            object['vector'] = self.vector2string(vector)
+            object['vector'] = vector.tolist()
 
-            results.append(object)
 
-        return results
+        # convert data to string format
+        for object in objects:
+            # avoid the problem with np.int32 is not serializable
+            for key in object.keys():
+                if key is 'vector':
+                    continue
+                object[key]=object[key].item()
+        json_objects = json.dumps(objects)
+        return json_objects
 
     def proto_get_labels(self, filename):
         # load image

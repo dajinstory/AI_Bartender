@@ -38,7 +38,11 @@ class Vectorizer:
     
     #image shape(1,28,28.1)
     def get_vector(self, image):
-        image_resized = cv2.resize(np.array(image), (28,28), interpolation = cv2.INTER_AREA )       
-        image_resized_gray = cv2.cvtColor(image_resized, cv2.COLOR_BGR2GRAY)
-        trm = self.model.predict(image_resized_gray.reshape(-1,28,28,1))
-        return trm
+        image_resized = cv2.resize(np.array(image), (28,28), interpolation = cv2.INTER_AREA )
+
+        # check if grayscale
+        if len(image_resized.shape)==3 and image_resized.shape[2]==3:
+            image_resized = cv2.cvtColor(image_resized, cv2.COLOR_BGR2GRAY)
+
+        trm = self.model.predict(image_resized.reshape(-1,28,28,1))
+        return np.array(trm)
