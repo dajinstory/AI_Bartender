@@ -28,7 +28,6 @@ from Detector import Detector
 
 
 
-
 class BartenderHandler:
 
     def __init__(self):
