@@ -1,6 +1,6 @@
 var thrift = require('thrift');
-var Bartender = require('../thrift_modules/gen-nodejs/Bartender');
-var ttypes = require('../thrift_modules/gen-nodejs/bartender_api_types');
+var Bartender_rmi = require('../thrift_modules/gen-nodejs/Bartender_rmi');
+var ttypes = require('../thrift_modules/gen-nodejs/bartender_rmi_types');
 const assert = require('assert');
 
 const express = require('express');
@@ -51,7 +51,7 @@ var connection = thrift.createConnection("localhost", 12000, {
 connection.on('uncaughtException', function (err) {
   console.log(err);
 });
-var client = thrift.createClient(Bartender, connection);
+var client = thrift.createClient(Bartender_rmi, connection);
 
 
 
